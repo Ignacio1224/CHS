@@ -1,4 +1,3 @@
-//Hola
 function createFields() {
     let lblHeader, lblDocument, lblPassword, lblDoctor, lblPartner;
     switch (document.getElementById("cmbLanguage").value) {
