@@ -1,57 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SHC Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/login.css" />
-    <script src="../js/globalVariables.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/doctors.js"></script>
-    <script src="../js/partners.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/base.css" />
+    <title>Clinic History System</title>
 </head>
 
-<body onload="createFields();">
-    <label for="cmbLanguage" id="lblLanguage">Language</label>
-    <select id="cmbLanguage" onchange="createFields();">
-        <option value="spanish" selected>Español</option>
-        <option value="english">English</option>
-    </select>
-    <div id="divTable">
-        <table>
-            <tr>
-                <td colspan="2" id="lblTableHeader"></td>
-            </tr>
-            <tr>
-                <td id="lblDocument"></td>
-                <td>
-                    <input type="text" id="txtDocument" maxlength="8" onKeyDown="if(event.keyCode==13) logIn();">
-                </td>
-            </tr>
-            <tr>
-                <td id="lblPassword"></td>
-                <td>
-                    <input type="password" id="txtPassword" onKeyDown="if(event.keyCode==13) logIn();">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <label for="rdbttnDoctor" id="lblDoctor" class="lblType"></label>
-                    <input type="radio" name="gender" value="male" id="rdbttnDoctor" class="rdbttnType">
-                    <label for="rdbttnDoctor" id="lblPartner" class="lblType"></label>
-                    <input type="radio" name="gender" value="female" id="rdbttnPartner" class="rdbttnType">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="button" id="bttnLogIn" value="LogIn" onclick="logIn();">
-                </td>
-            </tr>
-        </table>
+<body class="mainGradient">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col"></div>
+            <div id="loginBox" class="col-md-auto bg-light mt-5 rounded transparentBorder shadow p-3 mb-5">
+                <h1 class="display-6 mt-5">Clinic History System</h1>
+                <h6 class="text-center">Acceso al sistema</h6>
+
+                <!-- Profile selector -->
+                <div class="text-center">
+                    <h6 class="text-center mt-4">
+                        <small class="text-muted">Ingresar como</small>
+                    </h6>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> M&eacute;dico
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Paciente
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Form -->
+                <form class="mt-5">
+                    <div class="form-group">
+                        <label for="txtNumber">N&uacute;mero</label>
+                        <input class="form-control" type="text" id="txtNumber" onKeyDown="if(event.keyCode==13) logIn();">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDocument">Documento</label>
+                        <input class="form-control" id="txtDocument" maxlength="8" onKeyDown="if(event.keyCode==13) logIn();">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Clave</label>
+                        <input class="form-control" type="password" id="txtPassword" onKeyDown="if(event.keyCode==13) logIn();">
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-success">Ingresar</button>
+                    </div>
+                </form>
+                <div id="divError"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <!--<div id="divTable">
+            <table>
+                <tr>
+                    <td colspan="2" id="lblTableHeader"></td>
+                </tr>
+                <tr>
+                    <td id="lblDocument"></td>
+                    <td>
+                        <input type="text" id="txtDocument" maxlength="8" onKeyDown="if(event.keyCode==13) logIn();">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="lblPassword"></td>
+                    <td>
+                        <input type="password" id="txtPassword" onKeyDown="if(event.keyCode==13) logIn();">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="rdbttnDoctor" id="lblDoctor" class="lblType"></label>
+                        <input type="radio" name="gender" value="male" id="rdbttnDoctor" class="rdbttnType">
+                        <label for="rdbttnDoctor" id="lblPartner" class="lblType"></label>
+                        <input type="radio" name="gender" value="female" id="rdbttnPartner" class="rdbttnType">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" id="bttnLogIn" value="LogIn" onclick="logIn();">
+                    </td>
+                </tr>
+            </table>
+        </div>-->
     </div>
-    <div id="divError"></div>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/globalVariables.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/doctors.js"></script>
+    <script src="../js/partners.js"></script>
 </body>
 
 </html>

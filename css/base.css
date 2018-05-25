@@ -1,0 +1,21 @@
+/*!
+ * iClinics v. 0.0.1
+ * Copyright 2018 Ignacio Cabrera - Matías Schmid
+ */
+
+html, body {
+    height: 100%;
+}
+
+#loginBox {
+    display: none;
+}
+
+.mainGradient {
+    background-image: linear-gradient(#89bcff, #217ed4);
+}
+
+.transparentBorder {
+    background: white;
+    border: 20px solid rgba(0, 0, 0, 0.1);
+}
