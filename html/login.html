@@ -25,10 +25,10 @@
                     </h6>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> M&eacute;dico
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked onchange="hideFields();"> M&eacute;dico
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Paciente
+                            <input type="radio" name="options" id="option2" autocomplete="off" onchange="hideFields();"> Paciente
                         </label>
                     </div>
                 </div>
@@ -36,15 +36,15 @@
                 <!-- Form -->
                 <form class="mt-5">
                     <div class="form-group">
-                        <label for="txtNumber">N&uacute;mero</label>
+                        <label for="txtNumber" id="lblNumber">N&uacute;mero</label>
                         <input class="form-control" type="text" id="txtNumber" onKeyDown="if(event.keyCode==13) logIn();">
                     </div>
                     <div class="form-group">
-                        <label for="txtDocument">Documento</label>
+                        <label for="txtDocument" id="lblDocument">Documento</label>
                         <input class="form-control" id="txtDocument" maxlength="8" onKeyDown="if(event.keyCode==13) logIn();">
                     </div>
                     <div class="form-group">
-                        <label for="txtPassword">Clave</label>
+                        <label for="txtPassword" id="lblPassword">Clave</label>
                         <input class="form-control" type="password" id="txtPassword" onKeyDown="if(event.keyCode==13) logIn();">
                     </div>
                     <div class="text-center">
