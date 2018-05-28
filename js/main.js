@@ -8,8 +8,7 @@ function logIn() {
     let txtNumber = Number(document.getElementById("txtNumber").value);
     let txtDocument = Number(document.getElementById("txtDocument").value);
     let txtPassword = document.getElementById("txtPassword").value;
-    let rdbttnDoctor = document.getElementById("option1").checked;
-    let rdbttnPartner = document.getElementById("option2").checked;
+    let op = $('#slcProfile').val();
 
     let _logIn = false;
     let divError = document.getElementById("divError");
@@ -42,7 +41,7 @@ function logIn() {
     if (_logIn) {
     empty(divError);        
         _logIn = false;
-        if (rdbttnDoctor) {
+        if (op == "M") {
             // Doctor Access
             doctors.forEach(d => {
                 if (d.dNumber === txtNumber && d.password === txtPassword) {
@@ -60,7 +59,7 @@ function logIn() {
             }
         }
             
-        if(rdbttnPartner) {
+        if(op == "P") {
             // Partner Access
             partners.forEach(p => {
                 if (p.document === txtDocument && p.password === txtPassword) {

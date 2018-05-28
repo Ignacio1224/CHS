@@ -33,11 +33,11 @@
                     </div>
                     <div class="form-group" id="ctlGroupDocument">
                         <label for="txtDocument" id="lblDocument">Documento</label>
-                        <input class="form-control" id="txtDocument" maxlength="8">
+                        <input class="form-control" id="txtDocument" maxlength="8" onKeyDown="if(event.keyCode==13) logIn();">
                     </div>
                     <div class="form-group">
                         <label for="txtPassword" id="lblPassword">Clave</label>
-                        <input class="form-control" type="password" id="txtPassword">
+                        <input class="form-control" type="password" id="txtPassword" onKeyDown="if(event.keyCode==13) logIn();">
                     </div>
                     <div class="text-center">
                         <button type="button" class="btn btn-success" onclick="logIn();">Ingresar</button>
