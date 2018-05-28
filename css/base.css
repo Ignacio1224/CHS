@@ -19,3 +19,7 @@ html, body {
     background: white;
     border: 20px solid rgba(0, 0, 0, 0.1);
 }
+
+#divError {
+    color: rgba(198, 6, 6, 0.9);
+}
