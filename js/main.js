@@ -13,11 +13,6 @@ function logIn() {
     let _logIn = false;
     let divError = document.getElementById("divError");
 
-    error[0] = "El Campo Documento No Puede Estar Vacío!";
-    error[1] = "El Campo Contraseña No Puede Estar Vacío!";
-    error[2] = "The Document Field Is Invalid!";
-    error[3] = "Las Credenciales Son Incorrectas";
-
     empty(divError);
 
     // Control Nulls Inputs && Number(txtDocument)
