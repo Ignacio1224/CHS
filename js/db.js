@@ -39,3 +39,44 @@ function getDoctorNumber(_name) {
     }
     return numbers;
 }
+
+
+/** Partner Functions */
+
+/** Getters */
+
+/** Get Name, imput his Document */
+function getPartnerName(_document) {
+    let name = "";
+    for (let i = 0, l = partners.length; i < l; i++) {
+        if (partners[i].document === _document) {
+            name = partners[i].name;
+            break;
+        }
+    }
+    return name;
+}
+
+/** Get Medical Header, input his Document */
+function getMedicalHeader(_document) {
+    let doc = "";
+    for (let i = 0, l = partners.length; i < l; i++) {
+        if (partners[i].document === _document) {
+            doc = partners[i].medicalHeader;
+            break;
+        }
+    }
+    return doc;
+}
+
+/** Get Pasword, inputs his Document */
+function getPartnerPassword(_document) {
+    let passs = "";
+    for (let i = 0, l = partners.length; i < l; i++) {
+        if (partners[i].document === _document) {
+            passs = partners[i].password;
+            break;
+        }
+    }
+    return passs;
+}
