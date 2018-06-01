@@ -1,0 +1,38 @@
+User Interface in SPA
+    Finish UI LogIn [ ok ]
+
+    Finish UI Doctor
+
+    Finish UI Partner
+
+    Add Behaviour to UI
+
+
+Back End
+    Add Functionalities to LogIn [ ok ]
+        - LogIn [ ok ]
+
+    Add Functionalities to Doctor
+        - Add Story
+        - View Story
+        - Change Password
+        - View Agenda
+        - List Partner
+        - List Partner in specific date
+        - Close Session
+
+    Add Functionalities to Partner
+        - Change Password
+        - View Story
+        - View Pictures
+        - Change Medical Header
+        - List Consulted Doctors
+        - Close Session
+
+
+Testing
+    Test LogIn [ ok ]
+
+    Test Doctor
+
+    Test Partner
