@@ -7,7 +7,7 @@ let stories = [
         "reason": "Texto del motivo de la consulta…",
         "diagnostic": "Texto del diagnóstico del médico….",
         "prescription": "texto de la prescripción del médico...",
-        "picture": "archivo.jpg"
+        "picture": "../images/chsLogo.png"
     }
     
 ];
