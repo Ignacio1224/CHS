@@ -1,4 +1,4 @@
-let doctors = [
+var doctors = [
     {
         "dNumber": 49274397,
         "name": "Ignacio Cabrera",

@@ -49,7 +49,7 @@ function getSpeciality(_dNumber) {
 
 /** Get Medical Header, input his Document */
 function getMedicalHeader(_document) {
-    let doc = "";
+    let doc;
     for (let i = 0, l = partners.length; i < l; i++) {
         if (partners[i].document === _document) {
             doc = partners[i].medicalHeader;

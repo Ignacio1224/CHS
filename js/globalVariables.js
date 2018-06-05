@@ -14,3 +14,7 @@ error[3] = "Las Credenciales Son Incorrectas";
 
 /** Break Line*/
 const br = "<br>";
+
+/** Logged User */
+
+var loggedUser = 49274397;

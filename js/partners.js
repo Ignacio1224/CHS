@@ -1,8 +1,8 @@
-let partners = [
+var partners = [
     {
         "document": 49274397,
         "name": "Ignacio Cabrera",
-        "medicalHeader": "General Medicine",
+        "medicalHeader": 12345678,
         "password": "//1234"
     },
     {

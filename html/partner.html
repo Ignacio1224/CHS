@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="../css/base.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/base.css" />
     <title>Clinic History System</title>
 </head>
+
 <body>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark mainGradient">
-		<a class="navbar-brand" href="#">
-			<img src="../images/chsLogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-			&nbsp;
-			<span>Clinic History System</span>
-		</a>
+        <a class="navbar-brand" href="#">
+            <img src="../images/chsLogo.png" width="30" height="30" class="d-inline-block align-top" alt=""> &nbsp;
+            <span>Clinic History System</span>
+        </a>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav w-100">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home
-						<span class="sr-only">(current)</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Cambiar m&eacute;dico de referencia</a>
-				</li>
-				<li class="nav-item dropdown ml-auto">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-						Ana Gonz&aacute;lez
-					</a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Cambiar clave de acceso</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Cerrar sesi&oacute;n</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</nav>
-    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Cambiar m&eacute;dico de referencia</a>
+                </li> -->
+
+                <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Mi M&eacute;dico
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" id="ddiAM"></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Cambiar m&eacute;dico de referencia</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Ana Gonz&aacute;lez
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Cambiar clave de acceso</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Cerrar sesi&oacute;n</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Content -->
     <div class="container body-content">
         <div>
             <h3>&nbsp;</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">Historia cl&iacute;nica</li>
                 </ol>
             </nav>
@@ -57,9 +72,12 @@
         <!-- Tab content -->
         <nav>
             <div class="nav nav-tabs" id="partner-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-ch-tab" data-toggle="tab" href="#nav-clinic-history" role="tab" aria-controls="nav-clinic-history" aria-selected="true">Historia cl&iacute;nica</a>
-                <a class="nav-item nav-link" id="nav-medicalHistory-tab" data-toggle="tab" href="#nav-medical-history" role="tab" aria-controls="nav-medical-history" aria-selected="false">Historial de m&eacute;dicos consultados</a>
-                <a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="false">Im&aacute;genes</a>
+                <a class="nav-item nav-link active" id="nav-ch-tab" data-toggle="tab" href="#nav-clinic-history" role="tab" aria-controls="nav-clinic-history"
+                    aria-selected="true">Historia cl&iacute;nica</a>
+                <a class="nav-item nav-link" id="nav-medicalHistory-tab" data-toggle="tab" href="#nav-medical-history" role="tab" aria-controls="nav-medical-history"
+                    aria-selected="false">Historial de m&eacute;dicos consultados</a>
+                <a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images"
+                    aria-selected="false">Im&aacute;genes</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -92,13 +110,17 @@
             <div class="tab-pane fade" id="nav-medical-history" role="tabpanel" aria-labelledby="nav-medicalHistory-tab">...</div>
             <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">...</div>
         </div>
-    </div>    
+    </div>
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/partner.js"></script>
+    <script type="text/javascript" src="../js/partners.js"></script>
+    <script type="text/javascript" src="../js/doctors.js"></script>
     <script type="text/javascript" src="../js/stories.js"></script>
+    <script type="text/javascript" src="../js/globalVariables.js"></script>
     <script type="text/javascript" src="../js/db.js"></script>
+    <script type="text/javascript" src="../js/partner.js"></script>
     <script type="text/javascript" src="../js/viewPartner.js"></script>
 </body>
+
 </html>
