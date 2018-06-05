@@ -1,4 +1,4 @@
-var partners = [
+let partners = [
     {
         "document": 49274397,
         "name": "Ignacio Cabrera",
@@ -8,7 +8,7 @@ var partners = [
     {
         "document": 4927439,
         "name": "Pepe Griyo",
-        "medicalHeader": "General Medicine",
+        "medicalHeader": 12345,
         "password": "//1234"
     },
     {

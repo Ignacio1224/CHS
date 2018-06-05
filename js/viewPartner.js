@@ -6,7 +6,7 @@ function loadAll() {
 }
 
 function loadTableHistory() {
-    let st = getStory(loggedUser);
+    let st = getStory((loggedUser === null || loggedUser === undefined) ? 4927439 : loggedUser); // Cambiar a loggedUser, se usa de prueba 4927439
     let date = [];
     date = st.date.split(" - ");
     $('#tableHistory').append("<td>" + date[2] + " - " + date[1] + " - " + date[0] + "</td>");
@@ -18,5 +18,5 @@ function loadTableHistory() {
 }
 
 function loadActualDoctor() {
-    document.getElementById("ddiAM").innerHTML = getDoctorName(getMedicalHeader(loggedUser));
+    $("#ddiAM").append(getDoctorName(getMedicalHeader((loggedUser === null || loggedUser === undefined) ? 4927439 : loggedUser))); // Cambiar a loggedUser, se usa de prueba 4927439
 }

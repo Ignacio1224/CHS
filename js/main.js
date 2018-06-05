@@ -48,6 +48,7 @@ function logIn() {
             });
             if (_logIn) {
                 // ACCESS GRANTED
+                loggedUser = txtNumber;
                 $("#txtNumber").val("");
                 $("#txtPassword").val("");
                 window.open("doctor.html");
@@ -66,6 +67,7 @@ function logIn() {
             });
             if (_logIn) {
                 // ACCESS GRANTED
+                loggedUser = txtDocument;
                 document.getElementById("txtDocument").value = "";
                 document.getElementById("txtPassword").value = "";             
                 window.open("partner.html");
