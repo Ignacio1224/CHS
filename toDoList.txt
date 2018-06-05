@@ -1,3 +1,8 @@
+Practicas
+    Utilizar jQuery en lugar de vanillaJS
+    Utilizar comparacion estricta '===' en lugar de '=='
+    Comentarios en español
+
 User Interface in SPA
     Finish UI LogIn [ ok ]
 

@@ -1,4 +1,4 @@
-$('#tableHistory').ready(loadTableHistory);
+$(document).ready(loadTableHistory);
 
 function loadTableHistory() {
     let st = getStory(7896541);

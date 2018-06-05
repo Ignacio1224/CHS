@@ -5,28 +5,31 @@ function empty(myNode) {
 }
 
 function logIn() { 
-    let txtNumber = Number(document.getElementById("txtNumber").value);
-    let txtDocument = Number(document.getElementById("txtDocument").value);
-    let txtPassword = document.getElementById("txtPassword").value;
+    let txtNumber = Number($("#txtNumber").val());
+    let txtDocument = Number($("#txtDocument").val());
+    let txtPassword = $("#txtPassword").val();
     let op = $('#slcProfile').val();
 
     let _logIn = false;
-    let divError = document.getElementById("divError");
+    let divError = $("#divError");
 
     empty(divError);
 
     // Control Nulls Inputs && Number(txtDocument)
     if (txtDocument === "") {
-        divError.innerHTML += `<p>${error[0]}</p> ${br}`;
+        //divError.innerHTML += `<p>${error[0]}</p> ${br}`;
+        divError.html(`<p>${error[0]}</p> ${br}`);
         _logIn = false;
     } else if (isNaN(txtDocument)) {
-        divError.innerHTML += `<p>${error[2]}</p> ${br}`;
+        //divError.innerHTML += `<p>${error[2]}</p> ${br}`;
+        divError.html(`<p>${error[2]}</p> ${br}`);
         _logIn = false;
     } else { 
         _logIn = true;
     }
     if (txtPassword === "") {
-        divError.innerHTML += `<p>${error[1]}</p> ${br}`;
+        //divError.innerHTML += `<p>${error[1]}</p> ${br}`;
+        divError.html(`<p>${error[1]}</p> ${br}`);
         _logIn = false;
     } else if (_logIn){
         _logIn = true;
@@ -34,9 +37,9 @@ function logIn() {
 
     // Control Who Access to the System
     if (_logIn) {
-    empty(divError);        
+        empty(divError);        
         _logIn = false;
-        if (op == "M") {
+        if (op === "M") {
             // Doctor Access
             doctors.forEach(d => {
                 if (d.dNumber === txtNumber && d.password === txtPassword) {
@@ -45,8 +48,8 @@ function logIn() {
             });
             if (_logIn) {
                 // ACCESS GRANTED
-                document.getElementById("txtNumber").value = "";
-                document.getElementById("txtPassword").value = "";
+                $("#txtNumber").val("");
+                $("#txtPassword").val("");
                 window.open("doctor.html");
             } else {
                 // ACCESS DENIED 
@@ -54,7 +57,7 @@ function logIn() {
             }
         }
             
-        if(op == "P") {
+        if(op === "P") {
             // Partner Access
             partners.forEach(p => {
                 if (p.document === txtDocument && p.password === txtPassword) {
