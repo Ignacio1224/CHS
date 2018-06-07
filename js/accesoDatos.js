@@ -44,10 +44,10 @@
         var usuarioRetorno;
         switch(usuario._perfil) {
             case 'M':
-                usuarioRetorno = obtenerMedico(usuario._identidad);
+                usuarioRetorno = obtenerMedico(usuario._identidad, usuario._clave);
                 break;
             case 'P':
-                usuarioRetorno = obtenerPaciente(usuario._identidad);
+                usuarioRetorno = obtenerPaciente(usuario._identidad, usuario._clave);
                 break;
             default: 
                 usuarioRetorno = [];      
@@ -66,16 +66,16 @@
     };
 
     // Obtiene un médico de la lista a partir de su número de identificación
-    var obtenerMedico = function(_numero) {
+    var obtenerMedico = function(_numero, _clave) {
         return medicos.filter(function(medico) {
-            return medico.numero === _numero; 
+            return medico.numero === _numero && medico.clave === _clave; 
         });
     };
 
     // Obtiene un paciente de la lista a partir de su documento de identidad
-    var obtenerPaciente = function(_documento) {
+    var obtenerPaciente = function(_documento, _clave) {
         return pacientes.filter(function(paciente) {
-            return paciente.documento === _documento; 
+            return paciente.documento === _documento && paciente.clave === _clave; 
         });
     };
 
