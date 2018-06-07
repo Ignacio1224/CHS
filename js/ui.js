@@ -58,7 +58,8 @@ function ingresar() {
             console.log(accesoDatos.ObtenerUsuarioLogueado());
             $('#divError').hide();
             $('#vistaLogin').hide();
-            $('#vistaEscritorio').show();
+            $('#vistaEscritorioMedico').hide();
+            $('#vistaEscritorioSocio').show();
         } else {
             $('#divError').html('<span>No existe el usuario</span>');
             $('#divError').show();
