@@ -1,4 +1,3 @@
-
 // Eventos
 $(document).ready(mostrarCuadroLogin);
 $('#btnIngresar').click(ingresar);
@@ -33,7 +32,7 @@ function ingresar() {
     var perfil = $('#slcPerfil').val();
     var identidad;
     var clave = $('#txtClave').val();
-    
+
     if (perfil === 'M') {
         identidad = Number($('#txtNumero').val());
     } else {
@@ -47,7 +46,7 @@ function ingresar() {
      */
     if (clave !== "" && !isNaN(identidad) && identidad !== 0) {
         var usuario = accesoDatos.ObtenerUsuario({
-            _perfil : perfil,
+            _perfil: perfil,
             _identidad: identidad,
             _clave: clave
         });
@@ -55,17 +54,39 @@ function ingresar() {
         // Chequear si el usuario existe en el sistema.
         if (usuario.length > 0) {
             accesoDatos.EstablecerUsuarioLogueado(usuario);
-            console.log(accesoDatos.ObtenerUsuarioLogueado());
+
             $('#divError').hide();
             $('#vistaLogin').hide();
-            $('#vistaEscritorioMedico').hide();
-            $('#vistaEscritorioSocio').show();
+
+            if (usuario.hasOwnProperty('especialidad')) {
+                $('#vistaEscritorioMedico').show();
+                $('#vistaEscritorioSocio').hide();
+            } else {
+                $('#vistaEscritorioMedico').hide();
+                $('#vistaEscritorioSocio').show();
+            }
+
+            if ($('#vistaEscritorioSocio').is(':visible')) {
+                vistaEscritorioSocio();
+            } else if ($('#vistaEscritorioMedico').is(':visible')) {
+                vistaEscritorioMedico();
+            }
+
+            console.log(accesoDatos.ObtenerUsuarioLogueado());
         } else {
             $('#divError').html('<span>No existe el usuario</span>');
             $('#divError').show();
         }
     } else {
         $('#divError').html('<span>Los datos de acceso son incorrectos</span>');
-        $('#divError').show();  
+        $('#divError').show();
     }
+}
+
+function vistaEscritorioSocio() {
+    console.log("Soy Socio");
+}
+
+function vistaEscritorioMedico() {
+    console.log("Soy Medico");
 }
