@@ -53,23 +53,17 @@ function ingresar() {
 
         // Chequear si el usuario existe en el sistema.
         if (usuario.length > 0) {
-            accesoDatos.EstablecerUsuarioLogueado(usuario);
+            accesoDatos.EstablecerUsuarioLogueado(usuario[0]);
 
             $('#divError').hide();
             $('#vistaLogin').hide();
 
             if (usuario.hasOwnProperty('especialidad')) {
-                $('#vistaEscritorioMedico').show();
+                $('#vistaEscritorioMedico').show(vistaEscritorioMedico);
                 $('#vistaEscritorioSocio').hide();
             } else {
                 $('#vistaEscritorioMedico').hide();
-                $('#vistaEscritorioSocio').show();
-            }
-
-            if ($('#vistaEscritorioSocio').is(':visible')) {
-                vistaEscritorioSocio();
-            } else if ($('#vistaEscritorioMedico').is(':visible')) {
-                vistaEscritorioMedico();
+                $('#vistaEscritorioSocio').show(vistaEscritorioSocio);
             }
 
             console.log(accesoDatos.ObtenerUsuarioLogueado());
@@ -85,6 +79,9 @@ function ingresar() {
 
 function vistaEscritorioSocio() {
     console.log("Soy Socio");
+
+    $("#ddiAM").append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+
 }
 
 function vistaEscritorioMedico() {
