@@ -81,12 +81,13 @@ function ingresar() {
 }
 
 function vistaEscritorioSocio() {
-    $("#ddiAM").append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
-
+    $('#ddiAM').append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+    $('#navbarDropdown').append(accesoDatos.ObtenerUsuarioLogueado().nombre);
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
         $('#vistaLogin').show();
-        accesoDatos.EstablecerUsuarioLogueado(null);
+        usuario[0] = null;
+        accesoDatos.EstablecerUsuarioLogueado(usuario[0]);
     });
 
     $('#btnCambiarClave').click(function () {

@@ -77,7 +77,6 @@
         for (let i = 0, l = medicos.length; i < l; i++) {
             if (medicos[i].numero === _numero) {
                 return medicos[i].nombre;
-                break;
             }
         }
     };
@@ -89,6 +88,15 @@
         });
     };
 
+    // Obtiene un nombre de paciente de la lista a partir de su documento de identidad
+    var obtenerNombrePaciente = function(_documento) {
+        for (let i = 0, l = medicos.length; i < l; i++) {
+            if (pacientes[i].documento === _documento) {
+                return pacientes[i].nombre;
+            }
+        }
+    };
+
     // Interfaz pública
     return {
         EstablecerUsuarioLogueado: establecerUsuarioLogueado,
@@ -96,7 +104,8 @@
         ObtenerUsuario: obtenerUsuario,
         ObtenerMedico: obtenerMedico,
         ObtenerNombreMedico: obtenerNombreMedico,
-        ObtenerPaciente: obtenerPaciente
+        ObtenerPaciente: obtenerPaciente,
+        ObtenerNombrePaciente: obtenerNombrePaciente
     }
 
  })();
