@@ -82,11 +82,16 @@ function ingresar() {
 
 function vistaEscritorioSocio() {
     $("#ddiAM").append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
         $('#vistaLogin').show();
         accesoDatos.EstablecerUsuarioLogueado(null);
-    })
+    });
+
+    $('#btnCambiarClave').click(function () {
+        
+    });
 }
 
 function vistaEscritorioMedico() {
