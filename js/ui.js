@@ -54,6 +54,9 @@ function ingresar() {
         // Chequear si el usuario existe en el sistema.
         if (usuario.length > 0) {
             accesoDatos.EstablecerUsuarioLogueado(usuario[0]);
+            $('#txtNumero').val('');
+            $('#txtDocumento').val('');
+            $('#txtClave').val('');
 
             $('#divError').hide();
             $('#vistaLogin').hide();
@@ -81,7 +84,7 @@ function vistaEscritorioSocio() {
     $("#ddiAM").append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
-        mostrarCuadroLogin();
+        $('#vistaLogin').show();
         accesoDatos.EstablecerUsuarioLogueado(null);
     })
 }
