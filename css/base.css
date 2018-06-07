@@ -31,7 +31,12 @@ html, body {
     height: 100%;
 }
 
-#vistaEscritorio {
+#vistaEscritorioSocio {
+    height: 100%;
+    display: none;
+}
+
+#vistaEscritorioMedico {
     height: 100%;
     display: none;
 }
