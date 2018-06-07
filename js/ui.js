@@ -66,12 +66,6 @@ function ingresar() {
                 $('#vistaEscritorioSocio').show(vistaEscritorioSocio);
             }
 
-            /*if ($('#vistaEscritorioSocio').is(':visible')) {
-                vistaEscritorioSocio();
-            } else if ($('#vistaEscritorioMedico').is(':visible')) {
-                vistaEscritorioMedico();
-            }*/
-
             console.log(accesoDatos.ObtenerUsuarioLogueado());
         } else {
             $('#divError').html('<span>No existe el usuario</span>');
@@ -85,6 +79,9 @@ function ingresar() {
 
 function vistaEscritorioSocio() {
     console.log("Soy Socio");
+
+    $("#ddiAM").append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+
 }
 
 function vistaEscritorioMedico() {

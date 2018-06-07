@@ -72,6 +72,16 @@
         });
     };
 
+    // Obtiene un nombre de médico de la lista a partir de su número de identificación
+    var obtenerNombreMedico = function(_numero) {
+        for (let i = 0, l = medicos.length; i < l; i++) {
+            if (medicos[i].numero === _numero) {
+                return medicos[i].nombre;
+                break;
+            }
+        }
+    };
+
     // Obtiene un paciente de la lista a partir de su documento de identidad
     var obtenerPaciente = function(_documento, _clave) {
         return pacientes.filter(function(paciente) {
@@ -85,6 +95,7 @@
         ObtenerUsuarioLogueado: obtenerUsuarioLogueado,
         ObtenerUsuario: obtenerUsuario,
         ObtenerMedico: obtenerMedico,
+        ObtenerNombreMedico: obtenerNombreMedico,
         ObtenerPaciente: obtenerPaciente
     }
 
