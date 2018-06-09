@@ -69,7 +69,7 @@ function ingresar() {
                 $('#vistaEscritorioSocio').show(vistaEscritorioSocio);
             }
 
-            console.log(accesoDatos.ObtenerUsuarioLogueado());
+            //console.log(accesoDatos.ObtenerUsuarioLogueado());
         } else {
             $('#divError').html('<span>No existe el usuario</span>');
             $('#divError').show();
@@ -81,18 +81,40 @@ function ingresar() {
 }
 
 function vistaEscritorioSocio() {
-    $('#ddiAM').append(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
-    $('#navbarDropdown').append(accesoDatos.ObtenerUsuarioLogueado().nombre);
+    $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+    $('#navbarDropdown').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
         $('#vistaLogin').show();
-        usuario[0] = null;
-        accesoDatos.EstablecerUsuarioLogueado(usuario[0]);
+        accesoDatos.EstablecerUsuarioLogueado(null);
     });
 
     $('#btnCambiarClave').click(function () {
-        
+
     });
+
+    let st = []
+    for(let i = 0, l = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento).length; i < l; i++) {
+        st[i] = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento)[i];
+    }
+    
+    for (let j = 0, lar = st.length; j < lar; j++) {
+        let fechan = st[j].fecha.split(" - ");
+        $('#tablaHistorias').append(`<tr id='t${j}'></tr>`);
+        $(`#t${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+        $(`#t${j}`).append("<td>" + st[j].motivo + "</td>");
+        $(`#t${j}`).append("<td>" + st[j].numero + "</td>");
+        $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
+        $(`#t${j}`).append("<td>" + st[j].prescripcion + "</td>");
+        $(`#t${j}`).append("<td> <a href='" + st[j].imagen + "'> Imagen</a></td>");
+    }
+
+    for (let h = 0, hl = st.length; h < hl; h ++) {
+        let fechan = st[h].fecha.split(" - ");
+        $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
+        $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
+        $(`#h${h}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+    }
 }
 
 function vistaEscritorioMedico() {
