@@ -94,9 +94,12 @@ function vistaEscritorioSocio() {
     });
 
     let st = []
-    for(let i = 0, l = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento).length; i < l; i++) {
+    for (let i = 0, l = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento).length; i < l; i++) {
         st[i] = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento)[i];
     }
+
+    $('#tablaHistorias').html('');
+    $('#tablaMedicosConsultados').html('');
     
     for (let j = 0, lar = st.length; j < lar; j++) {
         let fechan = st[j].fecha.split(" - ");
@@ -109,7 +112,7 @@ function vistaEscritorioSocio() {
         $(`#t${j}`).append("<td> <a href='" + st[j].imagen + "'> Imagen</a></td>");
     }
 
-    for (let h = 0, hl = st.length; h < hl; h ++) {
+    for (let h = 0, hl = st.length; h < hl; h++) {
         let fechan = st[h].fecha.split(" - ");
         $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
