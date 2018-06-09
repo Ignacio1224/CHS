@@ -50,18 +50,18 @@ var accesoDatos = (function () {
         },
         {
             "historia": 2,
-            "documento": 3421345,
-            "numero": 123456,
-            "fecha": "2018 - 12 - 24", // YYYY - MM - DD
+            "documento": 7896541,
+            "numero": 234567,
+            "fecha": "2018 - 08 - 03", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
             "imagen": "../images/chsLogo.png"
         },
         {
-            "historia": 3,
+            "historia": 1,
             "documento": 3421345,
-            "numero": 234567,
+            "numero": 123456,
             "fecha": "2018 - 09 - 07", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
@@ -69,10 +69,10 @@ var accesoDatos = (function () {
             "imagen": "../images/chsLogo.png"
         },
         {
-            "historia": 4,
-            "documento": 7896541,
+            "historia": 2,
+            "documento": 3421345,
             "numero": 234567,
-            "fecha": "2018 - 08 - 03", // YYYY - MM - DD
+            "fecha": "2018 - 12 - 24", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
@@ -145,7 +145,7 @@ var accesoDatos = (function () {
         for (let i = 0, l = historias.length; i < l; i++) {
             if (historias[i].documento === _documento) {
                 hist[ind] = historias[i];
-                ind ++;
+                ind++;
             }
         }
         return hist;

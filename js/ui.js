@@ -101,7 +101,7 @@ function vistaEscritorioSocio() {
     $('#tablaHistorias').html('');
     $('#tablaMedicosConsultados').html('');
     
-    for (let j = 0, lar = st.length; j < lar; j++) {
+    for (let j = st[st.length - 1].historia - 1; j > -1; j--) {
         let fechan = st[j].fecha.split(" - ");
         $('#tablaHistorias').append(`<tr id='t${j}'></tr>`);
         $(`#t${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
@@ -112,7 +112,7 @@ function vistaEscritorioSocio() {
         $(`#t${j}`).append("<td> <a href='" + st[j].imagen + "'> Imagen</a></td>");
     }
 
-    for (let h = 0, hl = st.length; h < hl; h++) {
+    for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
         let fechan = st[h].fecha.split(" - ");
         $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
