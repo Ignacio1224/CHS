@@ -27,12 +27,12 @@ Back End
         - Close Session
 
     Add Functionalities to Partner
-        - Change Password
-        - View Story
+        - Change Password [ ok ]
+        - View Story [ ok ]
         - View Pictures
         - Change Medical Header
-        - List Consulted Doctors
-        - Close Session
+        - List Consulted Doctors [ ok ]
+        - Close Session [ ok ]
 
 
 Testing
