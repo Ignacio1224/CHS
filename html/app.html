@@ -92,7 +92,7 @@
                             aria-expanded="false">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" id="btnCambiarClave">Cambiar clave de acceso</a>
+                            <a class="dropdown-item" href="#modalCambiarClave" data-toggle="modal">Cambiar clave de acceso</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" id="btnCerrarSesion">Cerrar sesi&oacute;n</a>
                         </div>
@@ -156,6 +156,35 @@
                 <div class="tab-pane fade" id="nav-medical-history" role="tabpanel" aria-labelledby="nav-medicalHistory-tab">...</div>
                 <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">...</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal fade" id="modalCambiarClave" tabindex="-1" role="dialog" aria-labelledby="modalCambiarClaveTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalCambiarClaveTitulo">Cambiar clave de acceso</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txtClave">Nueva clave</label>
+                    <input type="password" class="form-control" name="txtClave" id="txtClave">
+                </div>
+                <div class="form-group">
+                    <label for="txtClaveVerificada">Repite la nueva clave</label>
+                    <input type="password" class="form-control" name="txtClaveVerificada" id="txtClaveVerificada">
+                </div>
+                <div id="divErrorCambiarClave" class="alert alert-danger alert-dismissable"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" id="btnCambiarClave">Cambiar clave</button>
+            </div>
+        </div>
         </div>
     </div>
 

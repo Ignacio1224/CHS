@@ -20,9 +20,13 @@ html, body {
     border: 20px solid rgba(0, 0, 0, 0.1);
 }
 
-#divError {
+#divError, #divErrorCambiarClave {
     color: rgba(198, 6, 6, 0.9);
     text-align: center;
+    display: none;
+}
+
+.invisible {
     display: none;
 }
 

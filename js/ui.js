@@ -1,6 +1,7 @@
-// Eventos
+// Enlace de eventos
 $(document).ready(mostrarCuadroLogin);
 $('#btnIngresar').click(ingresar);
+$('#btnCambiarClave').click(cambiarClave);
 
 /**
  * Muestra el cuadro de login en pantalla con un efecto de fundido.
@@ -28,7 +29,7 @@ function actualizarCampos() {
  * Acceso al sistema, se encarga de validar los datos de entrada y armar la interfaz gráfica de acuerdo al perfil de acceso.
  */
 function ingresar() {
-    $('#divError').empty();
+    $('#divErrorLogin').empty();
     var perfil = $('#slcPerfil').val();
     var identidad;
     var clave = $('#txtClave').val();
@@ -89,10 +90,25 @@ function vistaEscritorioSocio() {
         usuario[0] = null;
         accesoDatos.EstablecerUsuarioLogueado(usuario[0]);
     });
+}
 
-    $('#btnCambiarClave').click(function () {
-        
-    });
+function cambiarClave() {
+    var clave = $('input[name=txtClave]').val();
+    var claveVerificacion = $('input[name=txtClaveVerificada]').val();
+
+    if (clave !== '' && claveVerificacion !== '') {
+        if (clave !== claveVerificacion) {
+            $('#divErrorCambiarClave').html('<span>Las claves que has ingresado deben coincidir</span>');
+            $('#divErrorCambiarClave').show();
+        } else {
+            accesoDatos.ObtenerUsuarioLogueado().clave = clave;
+            console.log(accesoDatos.ObtenerUsuarioLogueado());
+            $('#modalCambiarClave').modal('hide');
+        }
+    } else {
+        $('#divErrorCambiarClave').html('<span>Los campos son obligatorios</span>');
+        $('#divErrorCambiarClave').show();
+    }
 }
 
 function vistaEscritorioMedico() {
