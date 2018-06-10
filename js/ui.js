@@ -85,14 +85,7 @@ function ingresar() {
 
 function vistaEscritorioSocio() {
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
-    $('#modalCambiarMedico').ready(function () {
-        let med = accesoDatos.ObtenerMedicos();
-        for (let i = 0, l = med.length; i < l; i++) {
-            if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera) {
-                $('#sCambiarMedico').append(`<option value='${med[i].numero}'>${med[i].nombre}</option>`);
-            }
-        }
-    });
+    $('#modalCambiarMedico').ready(cargarCmbMedico);
     $('#navbarDropdown').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
@@ -155,10 +148,21 @@ function cambiarClave() {
     }
 }
 
+function cargarCmbMedico() {
+    let med = accesoDatos.ObtenerMedicos();
+    $('#sCambiarMedico').html("");
+    for (let i = 0, l = med.length; i < l; i++) {
+        if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera) {
+            $('#sCambiarMedico').append(`<option value='${med[i].numero}'>${med[i].nombre}</option>`);
+        }
+    }
+}
+
 function cambiarMedico() {
     var medico = $('select[name=cmbCambiarMedico]').val();
     accesoDatos.ObtenerUsuarioLogueado().medicocabecera = Number(medico);
     console.log(accesoDatos.ObtenerUsuarioLogueado());
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').modal('hide');
+    $('#modalCambiarMedico').on('hidden.bs.modal', cargarCmbMedico());
 }
