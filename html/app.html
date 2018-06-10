@@ -54,7 +54,37 @@
 
     <!-- Vista escritorio medico -->
     <div class="container-fluid" id="vistaEscritorioMedico">
-        <h1>Aqui va el contenido del dashboard Medico</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark mainGradient">
+            <!-- CHS Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="../images/chsLogo.png" width="30" height="30" class="d-inline-block align-top" alt=""> &nbsp;
+                <span>Clinic History System</span>
+            </a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav w-100">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Agenda de m&eacute;dicos</a>
+                    </li>
+                    <li class="nav-item dropdown ml-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMedico" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <!-- Nombre del Medico -->
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#modalCambiarClave" data-toggle="modal">Cambiar clave de acceso</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" id="btnCerrarSesionM">Cerrar sesi&oacute;n</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 
     <!-- Vista escritorio socio -->
@@ -84,7 +114,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#" id="ddiAM"></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cambiar m&eacute;dico de referencia</a>
+                            <a class="dropdown-item" href="#modalCambiarMedico" data-toggle="modal">Cambiar m&eacute;dico de referencia</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown ml-auto">
@@ -167,29 +197,52 @@
     <!-- Modals -->
     <div class="modal fade" id="modalCambiarClave" tabindex="-1" role="dialog" aria-labelledby="modalCambiarClaveTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="modalCambiarClaveTitulo">Cambiar clave de acceso</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="txtClave">Nueva clave</label>
-                    <input type="password" class="form-control" name="txtClave" id="txtClave">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCambiarClaveTitulo">Cambiar clave de acceso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="txtClaveVerificada">Repite la nueva clave</label>
-                    <input type="password" class="form-control" name="txtClaveVerificada" id="txtClaveVerificada">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txtClave">Nueva clave</label>
+                        <input type="password" class="form-control" name="txtClave" id="txtClave">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtClaveVerificada">Repite la nueva clave</label>
+                        <input type="password" class="form-control" name="txtClaveVerificada" id="txtClaveVerificada">
+                    </div>
+                    <div id="divErrorCambiarClave" class="alert alert-danger alert-dismissable"></div>
                 </div>
-                <div id="divErrorCambiarClave" class="alert alert-danger alert-dismissable"></div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-success" id="btnCambiarClave">Cambiar clave</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="btnCambiarClave">Cambiar clave</button>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <div class="modal fade" id="modalCambiarMedico" tabindex="-1" role="dialog" aria-labelledby="modalCambiarMedicoTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCambiarMedicoTitulo">Cambiar M&eacute;dico de referencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sCambiarMedico">Nuevo M&eacute;dico</label>
+                        <select id="sCambiarMedico" class="form-control" name="cmbCambiarMedico"></select>
+                        <!-- <input type="password" class="form-control" name="txtClave" id="txtClave"> -->
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="btnCambiarMedico">Cambiar M&eacute;dico</button>
+                </div>
+            </div>
         </div>
     </div>
 

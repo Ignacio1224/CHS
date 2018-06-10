@@ -121,6 +121,11 @@ var accesoDatos = (function () {
             }
         }
     };
+    
+    // Obtiene todos los medicos de la lista
+    var obtenerMedicos = function () {
+        return medicos;
+    };
 
     // Obtiene un paciente de la lista a partir de su documento de identidad
     var obtenerPaciente = function (_documento, _clave) {
@@ -157,6 +162,7 @@ var accesoDatos = (function () {
         ObtenerUsuarioLogueado: obtenerUsuarioLogueado,
         ObtenerUsuario: obtenerUsuario,
         ObtenerMedico: obtenerMedico,
+        ObtenerMedicos: obtenerMedicos,
         ObtenerNombreMedico: obtenerNombreMedico,
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,

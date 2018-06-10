@@ -4,7 +4,7 @@ Practicas
     Comentarios en español
 
 User Interface in SPA
-    Finish UI LogIn [ ok ]
+        Finish UI LogIn [ ok ]
 
     Finish UI Doctor
 
@@ -14,30 +14,33 @@ User Interface in SPA
 
 
 Back End
-    Add Functionalities to LogIn [ ok ]
-        - LogIn [ ok ]
+        Add Functionalities to LogIn [ ok ]
+                - LogIn [ ok ]
 
     Add Functionalities to Doctor
         - Add Story
         - View Story
-        - Change Password
+            - Change Password [ ok ]
         - View Agenda
         - List Partner
         - List Partner in specific date
-        - Close Session
+            - Close Session [ ok ]
 
     Add Functionalities to Partner
-        - Change Password [ ok ]
-        - View Story [ ok ]
+            - Change Password [ ok ]
+            - View Story [ ok ]
         - View Pictures
-        - Change Medical Header
-        - List Consulted Doctors [ ok ]
-        - Close Session [ ok ]
+            - Change Medical Header [ ok ]
+            - List Consulted Doctors [ ok ]
+            - Close Session [ ok ]
 
 
 Testing
-    Test LogIn [ ok ]
+        Test LogIn [ ok ]
 
     Test Doctor
 
     Test Partner
+
+Otros
+    - Pasar a funcion la parte de cerrar sesion

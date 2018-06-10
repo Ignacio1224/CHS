@@ -2,6 +2,7 @@
 $(document).ready(mostrarCuadroLogin);
 $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
+$('#btnCambiarMedico').click(cambiarMedico);
 
 
 /**
@@ -84,15 +85,19 @@ function ingresar() {
 
 function vistaEscritorioSocio() {
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+    $('#modalCambiarMedico').ready(function () {
+        let med = accesoDatos.ObtenerMedicos();
+        for (let i = 0, l = med.length; i < l; i++) {
+            if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera) {
+                $('#sCambiarMedico').append(`<option value='${med[i].numero}'>${med[i].nombre}</option>`);
+            }
+        }
+    });
     $('#navbarDropdown').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
     $("#btnCerrarSesion").click(function () {
         $('#vistaEscritorioSocio').hide();
         $('#vistaLogin').show();
         accesoDatos.EstablecerUsuarioLogueado(null);
-    });
-
-    $('#btnCambiarClave').click(function () {
-
     });
 
     let st = []
@@ -123,7 +128,12 @@ function vistaEscritorioSocio() {
 }
 
 function vistaEscritorioMedico() {
-    console.log("Soy Medico");
+    $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
+    $("#btnCerrarSesionM").click(function () {
+        $('#vistaEscritorioMedico').hide();
+        $('#vistaLogin').show();
+        accesoDatos.EstablecerUsuarioLogueado(null);
+    });
 }
 
 function cambiarClave() {
@@ -143,4 +153,12 @@ function cambiarClave() {
         $('#divErrorCambiarClave').html('<span>Los campos son obligatorios</span>');
         $('#divErrorCambiarClave').show();
     }
+}
+
+function cambiarMedico() {
+    var medico = $('select[name=cmbCambiarMedico]').val();
+    accesoDatos.ObtenerUsuarioLogueado().medicocabecera = Number(medico);
+    console.log(accesoDatos.ObtenerUsuarioLogueado());
+    $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
+    $('#modalCambiarMedico').modal('hide');
 }
