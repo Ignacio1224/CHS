@@ -3,7 +3,8 @@
  * Copyright 2018 Ignacio Cabrera - Matías Schmid
  */
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -20,7 +21,8 @@ html, body {
     border: 20px solid rgba(0, 0, 0, 0.1);
 }
 
-#divError, #divErrorCambiarClave {
+#divError,
+#divErrorCambiarClave {
     color: rgba(198, 6, 6, 0.9);
     text-align: center;
     display: none;
@@ -31,6 +33,7 @@ html, body {
 }
 
 /* Vista login */
+
 #vistaLogin {
     height: 100%;
 }
