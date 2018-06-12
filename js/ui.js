@@ -126,11 +126,11 @@ function vistaEscritorioSocio() {
         let fechan = st[j].fecha.split(" - ");
         $('#tablaHistorias').append(`<tr id='t${j}'></tr>`);
         $(`#t${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+        $(`#t${j}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[j].numero) + "</td>");
         $(`#t${j}`).append("<td>" + st[j].motivo + "</td>");
-        $(`#t${j}`).append("<td>" + st[j].numero + "</td>");
         $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
         $(`#t${j}`).append("<td>" + st[j].prescripcion + "</td>");
-        $(`#t${j}`).append("<td> <a href='" + st[j].imagen + "'> Imagen</a></td>");
+        $(`#t${j}`).append("<td> <img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
     }
 
     for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
@@ -144,7 +144,7 @@ function vistaEscritorioSocio() {
     $('#galery').html('');
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
         let fechan = st[k].fecha.split(" - ");
-        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p></div></a></div></div></div>`);
+        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div></div>`);
     }
 }
 
@@ -172,7 +172,7 @@ function cargarCmbMedico() {
     let med = accesoDatos.ObtenerMedicos();
     $('#sCambiarMedico').html("");
     for (let i = 0, l = med.length; i < l; i++) {
-        if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera) {
+        if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera && accesoDatos.ObtenerEspecialidad(accesoDatos.ObtenerUsuarioLogueado().medicocabecera) === "Medicina General") {
             $('#sCambiarMedico').append(`<option value='${med[i].numero}'>${med[i].nombre}</option>`);
         }
     }
