@@ -83,6 +83,15 @@ function ingresar() {
     }
 }
 
+function vistaEscritorioMedico() {
+    $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
+    $("#btnCerrarSesionM").click(function () {
+        $('#vistaEscritorioMedico').hide();
+        $('#vistaLogin').show();
+        accesoDatos.EstablecerUsuarioLogueado(null);
+    });
+}
+
 function vistaEscritorioSocio() {
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').ready(cargarCmbMedico);
@@ -118,16 +127,14 @@ function vistaEscritorioSocio() {
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
         $(`#h${h}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
     }
+
+    $('#nav-images').html('<div class="containerr" id="galery">');
+    for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
+        let fechan = st[k].fecha.split(" - ");
+        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}' target='_blank'><img src='${st[k].imagen}' alt='Lights' style='width:100%'><div class='caption'><p>${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p></div></a></div></div></div></div>`);
+    }
 }
 
-function vistaEscritorioMedico() {
-    $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
-    $("#btnCerrarSesionM").click(function () {
-        $('#vistaEscritorioMedico').hide();
-        $('#vistaLogin').show();
-        accesoDatos.EstablecerUsuarioLogueado(null);
-    });
-}
 
 function cambiarClave() {
     var clave = $('input[name=txtClave]').val();

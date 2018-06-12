@@ -46,7 +46,7 @@ var accesoDatos = (function () {
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/chsLogo.png"
+            "imagen": "../images/placa2.jpg"
         },
         {
             "historia": 2,
@@ -56,7 +56,7 @@ var accesoDatos = (function () {
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/chsLogo.png"
+            "imagen": "../images/placa1.jpg"
         },
         {
             "historia": 1,
@@ -66,7 +66,7 @@ var accesoDatos = (function () {
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/chsLogo.png"
+            "imagen": "../images/placa1.jpg"
         },
         {
             "historia": 2,
@@ -76,7 +76,7 @@ var accesoDatos = (function () {
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/chsLogo.png"
+            "imagen": "../images/placa2.jpg"
         }
     ];
 
