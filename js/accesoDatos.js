@@ -126,7 +126,16 @@ var accesoDatos = (function () {
     var obtenerMedicos = function () {
         return medicos;
     };
-
+    
+    // Obtiene la especialidad del medico de la lista por su numero
+    var obtenerEspecialidad = function (_numero) {
+        for (let i = 0, l = medicos.length; i < l; i++) {
+            if (medicos[i].numero === _numero) {
+                return medicos[i].especialidad;
+            }
+        }
+    };
+    
     // Obtiene un paciente de la lista a partir de su documento de identidad
     var obtenerPaciente = function (_documento, _clave) {
         return pacientes.filter(function (paciente) {
@@ -164,6 +173,7 @@ var accesoDatos = (function () {
         ObtenerMedico: obtenerMedico,
         ObtenerMedicos: obtenerMedicos,
         ObtenerNombreMedico: obtenerNombreMedico,
+        ObtenerEspecialidad: obtenerEspecialidad,
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,
         ObtenerHistoria: obtenerHistoria

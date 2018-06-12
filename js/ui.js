@@ -136,8 +136,9 @@ function vistaEscritorioSocio() {
     for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
         let fechan = st[h].fecha.split(" - ");
         $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
-        $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
         $(`#h${h}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+        $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
+        $(`#h${h}`).append("<td>" + accesoDatos.ObtenerEspecialidad(st[h].numero) + "</td>");
     }
 
     $('#galery').html('');

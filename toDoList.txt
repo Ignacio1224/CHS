@@ -29,7 +29,7 @@ Back End
     Add Functionalities to Partner
             - Change Password [ ok ]
             - View Story [ ok ]
-        - View Pictures
+            - View Pictures [ ok ]
             - Change Medical Header [ ok ]
             - List Consulted Doctors [ ok ]
             - Close Session [ ok ]
