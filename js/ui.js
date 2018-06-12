@@ -93,6 +93,18 @@ function vistaEscritorioMedico() {
 }
 
 function vistaEscritorioSocio() {
+    $('#navText').html("Historia Cl&iacute;nica");
+    $('#nav-ch-tab').click(function () {
+        $('#navText').html("Historia Cl&iacute;nica");
+    });
+
+    $('#nav-medicalHistory-tab').click(function () {
+        $('#navText').html("Historial de M&eacute;dicos Consultados");
+    });
+
+    $('#nav-images-tab').click(function () {
+        $('#navText').html("Im&aacute;genes");
+    });
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').ready(cargarCmbMedico);
     $('#navbarDropdown').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
@@ -128,10 +140,10 @@ function vistaEscritorioSocio() {
         $(`#h${h}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
     }
 
-    $('#nav-images').html('<div class="containerr" id="galery">');
+    $('#galery').html('');
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
         let fechan = st[k].fecha.split(" - ");
-        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}' target='_blank'><img src='${st[k].imagen}' alt='Lights' style='width:100%'><div class='caption'><p>${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p></div></a></div></div></div></div>`);
+        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p></div></a></div></div></div>`);
     }
 }
 
