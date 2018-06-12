@@ -44,3 +44,4 @@ Testing
 
 Otros
     - Pasar a funcion la parte de cerrar sesion
+    - Alinear imagenes de grilla de paciente
