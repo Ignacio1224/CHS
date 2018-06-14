@@ -134,7 +134,6 @@ function vistaEscritorioSocio() {
         $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
         $(`#t${j}`).append("<td>" + st[j].prescripcion + "</td>");
         $(`#t${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
-        $('#imgModalActuacion').attr('src', st[j].imagen);
         //$(`#t${j}`).append("<td> <img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
     }
 
@@ -157,11 +156,17 @@ function vistaEscritorioSocio() {
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerEspecialidad(st[h].numero) + "</td>");
     }
 
-    $('#gallery').html('');
+    $('#gallery').empty();
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
         let fechan = st[k].fecha.split(" - ");
         $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
     }
+    
+    /*$('#gallery').html('');
+    for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
+        let fechan = st[k].fecha.split(" - ");
+        $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
+    }*/
 }
 
 
