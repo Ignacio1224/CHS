@@ -186,6 +186,8 @@ function cambiarClave() {
             accesoDatos.ObtenerUsuarioLogueado().clave = clave;
             console.log(accesoDatos.ObtenerUsuarioLogueado());
             $('#modalCambiarClave').modal('hide');
+            $('input[name=txtClave]').val("");
+            $('input[name=txtClaveVerificada]').val("");
         }
     } else {
         $('#divErrorCambiarClave').html('<span>Los campos son obligatorios</span>');
