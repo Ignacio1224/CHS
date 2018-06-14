@@ -125,8 +125,9 @@ function vistaEscritorioSocio() {
     $('#tablaHistorias').html('');
     $('#tablaMedicosConsultados').html('');
 
+    let fechan;
     for (let j = st[st.length - 1].historia - 1; j > -1; j--) {
-        let fechan = st[j].fecha.split(" - ");
+        fechan = st[j].fecha.split(" - ");
         $('#tablaHistorias').append(`<tr id='t${j}'></tr>`);
         $(`#t${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
         $(`#t${j}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[j].numero) + "</td>");
@@ -149,17 +150,26 @@ function vistaEscritorioSocio() {
     });
 
     for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
-        let fechan = st[h].fecha.split(" - ");
+        fechan = st[h].fecha.split(" - ");
         $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
         $(`#h${h}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerEspecialidad(st[h].numero) + "</td>");
     }
 
+    let im = 0;
+    let j;
     $('#gallery').empty();
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
-        $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%' class='img-thumbnail'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
-        //$('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%' class='img-thumbnail'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
+        if (im % 5 === 0) {
+            j = im;
+            $('#gallery').append(`<div class="card-deck" id="j">`);
+        }
+        
+        fechan = st[k].fecha.split(" - ");
+        $('#j').append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
+
+        im++;
     }
 }
 
