@@ -92,6 +92,9 @@ function vistaEscritorioMedico() {
     });
 }
 
+/**
+ * Punto de entrada para la vista del escritorio del perfil socio.
+ */
 function vistaEscritorioSocio() {
     $('#navText').html("Historia Cl&iacute;nica");
     $('#nav-ch-tab').click(function () {
@@ -130,8 +133,21 @@ function vistaEscritorioSocio() {
         $(`#t${j}`).append("<td>" + st[j].motivo + "</td>");
         $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
         $(`#t${j}`).append("<td>" + st[j].prescripcion + "</td>");
-        $(`#t${j}`).append("<td> <img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
+        $(`#t${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
+        $('#imgModalActuacion').attr('src', st[j].imagen);
+        //$(`#t${j}`).append("<td> <img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
     }
+
+    // Conectar eventos en cada miniatura de imagen de actuación al popup con la imagen correspondiente ampliada.
+    $('#tablaHistorias a').click(e => {
+        e.preventDefault();
+        console.log($(this));
+        let rutaAbsoluta = e.target.src;
+        let nombreFoto = rutaAbsoluta.substr(rutaAbsoluta.lastIndexOf('/') + 1);
+        console.log(rutaAbsoluta.substr(rutaAbsoluta.lastIndexOf('/') + 1));
+        $('#imgModalActuacion').attr('src', '../images/' + nombreFoto);
+        $('#modalVerImagen').modal('show');
+    });
 
     for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
         let fechan = st[h].fecha.split(" - ");
@@ -141,10 +157,10 @@ function vistaEscritorioSocio() {
         $(`#h${h}`).append("<td>" + accesoDatos.ObtenerEspecialidad(st[h].numero) + "</td>");
     }
 
-    $('#galery').html('');
+    $('#gallery').html('');
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
         let fechan = st[k].fecha.split(" - ");
-        $('#galery').append(`<div class='row'><div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div></div>`);
+        $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
     }
 }
 

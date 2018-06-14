@@ -156,7 +156,7 @@
                     <table class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th style="width: 12%">Fecha</th>
                                 <th>M&eacute;dico</th>
                                 <th>Motivo</th>
                                 <th>Diagn&oacute;stico</th>
@@ -173,7 +173,7 @@
                     <table class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th style="width: 24%">Fecha de consulta</th>
                                 <th>M&eacute;dico</th>
                                 <th>Especialidad</th>
                             </tr>
@@ -185,7 +185,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
-                    <div class="containerr" id="galery">
+                    <div class="containerr" id="gallery">
                         <!-- Galeria de Imagenes -->
                     </div>
                 </div>
@@ -194,6 +194,7 @@
     </div>
 
     <!-- Modals -->
+    <!-- Modal cambiar clave-->
     <div class="modal fade" id="modalCambiarClave" tabindex="-1" role="dialog" aria-labelledby="modalCambiarClaveTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -222,6 +223,7 @@
         </div>
     </div>
 
+    <!-- Modal cambiar médico de referencia-->
     <div class="modal fade" id="modalCambiarMedico" tabindex="-1" role="dialog" aria-labelledby="modalCambiarMedicoTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -244,11 +246,33 @@
                 </div>
             </div>
         </div>
+    </div>    
 
-        <script src="../js/jquery.js"></script>
-        <script src="../js/bootstrap.js"></script>
-        <script src="../js/accesoDatos.js"></script>
-        <script src="../js/ui.js"></script>
+    <!-- Modal ver imagen de actuación-->
+    <div class="modal fade" id="modalVerImagen" tabindex="-1" role="dialog" aria-labelledby="modalVerImagen" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCambiarMedicoTitulo">Imagen de la actuaci&oacute;n</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="imgModalActuacion">
+                    <p>&nbsp;</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/accesoDatos.js"></script>
+    <script src="../js/ui.js"></script>
 </body>
 
 </html>

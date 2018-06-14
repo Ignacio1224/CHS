@@ -47,3 +47,10 @@ body {
     height: 100%;
     display: none;
 }
+
+/* Modals */
+
+#imgModalActuacion {
+    width: 80%;
+    height: 80%;
+}
