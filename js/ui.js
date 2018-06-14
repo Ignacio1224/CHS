@@ -158,8 +158,8 @@ function vistaEscritorioSocio() {
 
     $('#gallery').empty();
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
-        let fechan = st[k].fecha.split(" - ");
-        $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
+        $('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%' class='img-thumbnail'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
+        //$('#gallery').append(`<div class='col-md-4'><div class='thumbnail'><a href='${st[k].imagen}'target='_blank'><img src='${st[k].imagen}' style='width:100%' class='img-thumbnail'><div class='caption'><p>Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</p><p>Diagn&oacute;stico: ${st[k].diagnostico}</p></div></a></div></div>`);
     }
 }
 
