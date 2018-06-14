@@ -163,11 +163,11 @@ function vistaEscritorioSocio() {
     for (let k = st[st.length - 1].historia - 1; k > -1; k--) {
         if (im % 5 === 0) {
             j = im;
-            $('#gallery').append(`<div class="card-deck" id="j">`);
+            $('#gallery').append(`<div class="card-deck" id="${j}">`);
         }
         
         fechan = st[k].fecha.split(" - ");
-        $('#j').append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
+        $(`#${j}`).append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
 
         im++;
     }
