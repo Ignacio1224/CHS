@@ -83,6 +83,9 @@ function ingresar() {
     }
 }
 
+/**
+ * Punto de entrada para la vista del escritorio del perfil médico.
+ */
 function vistaEscritorioMedico() {
     $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
     $("#btnCerrarSesionM").click(function () {
@@ -96,18 +99,20 @@ function vistaEscritorioMedico() {
  * Punto de entrada para la vista del escritorio del perfil socio.
  */
 function vistaEscritorioSocio() {
-    $('#navText').html("Historia Cl&iacute;nica");
+    $('#navTextSocio').html("Historia Cl&iacute;nica");
+
     $('#nav-ch-tab').click(function () {
-        $('#navText').html("Historia Cl&iacute;nica");
+        $('#navTextSocio').html("Historia Cl&iacute;nica");
     });
 
     $('#nav-medicalHistory-tab').click(function () {
-        $('#navText').html("Historial de M&eacute;dicos Consultados");
+        $('#navTextSocio').html("Historial de M&eacute;dicos Consultados");
     });
 
     $('#nav-images-tab').click(function () {
-        $('#navText').html("Im&aacute;genes");
+        $('#navTextSocio').html("Im&aacute;genes");
     });
+
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').ready(cargarCmbMedico);
     $('#navbarDropdown').html(accesoDatos.ObtenerUsuarioLogueado().nombre);

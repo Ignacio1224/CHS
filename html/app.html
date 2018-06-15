@@ -63,11 +63,6 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav w-100">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
                     <li class="nav-item dropdown ml-auto">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMedico" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
@@ -82,6 +77,49 @@
                 </ul>
             </div>
         </nav>
+
+        <!-- Content -->
+        <div class="container body-content">
+            <!-- Tab content -->
+            <p>&nbsp;</p>
+            <nav>
+                <div class="nav nav-tabs" id="doctor-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-searchCH-tab" data-toggle="tab" href="#nav-clinic-search" role="tab" aria-controls="nav-clinic-search"
+                        aria-selected="true">B&uacute;squeda de historia cl&iacute;nica</a>
+                    <a class="nav-item nav-link" id="nav-medicalDiary-tab" data-toggle="tab" href="#nav-medical-diary" role="tab" aria-controls="nav-medical-diary"
+                        aria-selected="false">Agenda de m&eacute;dicos</a>
+                    <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-treated-patients" role="tab" aria-controls="nav-treated-patients"
+                        aria-selected="false">Pacientes tratados</a>
+                    <a class="nav-item nav-link" id="nav-CHDay-tab" data-toggle="tab" href="#nav-ch-day" role="tab" aria-controls="nav-ch-day"
+                        aria-selected="false">Historias cl&iacute;nicas por d&iacute;a</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Tab container búsqueda de historia clínica -->
+                <div class="tab-pane fade show active" id="nav-clinic-search" role="tabpanel" aria-labelledby="nav-searchCH-tab">
+                    <br>
+                    <h1>Contenido del tab de b&uacute;squeda de historia cl&iacute;nica</h1>
+                </div>
+
+                <!-- Tab container agenda de medicos -->
+                <div class="tab-pane fade" id="nav-medical-diary" role="tabpanel" aria-labelledby="nav-medicalDiary-tab">
+                    <br>
+                    <h1>Contenido del tab de agenda de medicos</h1>
+                </div>
+
+                <!-- Tab container pacientes tratados -->
+                <div class="tab-pane fade" id="nav-treated-patients" role="tabpanel" aria-labelledby="nav-patients-tab">
+                    <br>
+                    <h1>Contenido del tab de pacientes tratados</h1>
+                </div>
+
+                <!-- Tab container historias clinicas de un dia -->
+                <div class="tab-pane fade" id="nav-ch-day" role="tabpanel" aria-labelledby="nav-CHDay-tab">
+                    <br>
+                    <h1>Contenido del tab de historias cl&iacute;nicas por dia</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Vista escritorio socio -->
@@ -95,12 +133,6 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav w-100">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-
                     <li class="nav-item dropdown ml-auto">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Mi M&eacute;dico
@@ -127,19 +159,8 @@
 
         <!-- Content -->
         <div class="container body-content">
-            <div>
-                <h3>&nbsp;</h3>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="#">Inicio</a>
-                        </li>
-                        <li class="breadcrumb-item active" id="navText" aria-current="page"></li>
-                    </ol>
-                </nav>
-            </div>
-
             <!-- Tab content -->
+            <p>&nbsp;</p>
             <nav>
                 <div class="nav nav-tabs" id="partner-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-ch-tab" data-toggle="tab" href="#nav-clinic-history" role="tab" aria-controls="nav-clinic-history"
@@ -170,6 +191,7 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="nav-medical-history" role="tabpanel" aria-labelledby="nav-medicalHistory-tab">
+                    <br>
                     <table class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -185,6 +207,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+                    <br>
                     <div class="container">
                         <!-- <div class="row" id="gallery"></div> -->
                         <!-- Galeria de Imagenes -->

@@ -11,16 +11,22 @@ var accesoDatos = (function () {
 
     /** JUEGO DE DATOS */
     var medicos = [{
-            numero: 123456,
-            nombre: 'Matias Schmid',
-            especialidad: 'Medicina General',
-            clave: 'MSPass32'
+            'numero': 123456,
+            'nombre': 'Matias Schmid',
+            'especialidad': 'Medicina General',
+            'clave': 'MSPass32'
         },
         {
-            numero: 234567,
-            nombre: 'Ignacio Cabrera',
-            especialidad: 'Medicina General',
-            clave: 'ICPass32'
+            'numero': 234567,
+            'nombre': 'Ignacio Cabrera',
+            'especialidad': 'Medicina General',
+            'clave': 'ICPass32'
+        },
+        {
+            'numero': 891011,
+            'nombre': 'Marcelo Medina',
+            'especialidad': 'Medicina General',
+            'clave': 'MMPass32'
         }
     ];
 
