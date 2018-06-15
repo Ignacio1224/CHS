@@ -25,7 +25,7 @@ var accesoDatos = (function () {
         {
             'numero': 891011,
             'nombre': 'Marcelo Medina',
-            'especialidad': 'Medicina General',
+            'especialidad': 'Cardiología',
             'clave': 'MMPass32'
         }
     ];
@@ -171,6 +171,18 @@ var accesoDatos = (function () {
         return hist;
     };
 
+    // Obtiene la agenda de medicos de la institución
+    var obtenerAgendaDeMedicos = function() {
+        return medicos;
+    };
+    
+    /*var obtenerAgendaDeMedicos = function (propiedad, valor) {
+        if (propiedad === '') {
+
+        }
+        return medicos.filter(medico => medico[propiedad].startsWith(valor));
+    }*/
+
     // Interfaz pública
     return {
         EstablecerUsuarioLogueado: establecerUsuarioLogueado,
@@ -182,7 +194,8 @@ var accesoDatos = (function () {
         ObtenerEspecialidad: obtenerEspecialidad,
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,
-        ObtenerHistoria: obtenerHistoria
+        ObtenerHistoria: obtenerHistoria,
+        ObtenerAgendaDeMedicos: obtenerAgendaDeMedicos
     }
 
 })();

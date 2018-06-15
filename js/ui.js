@@ -93,6 +93,47 @@ function vistaEscritorioMedico() {
         $('#vistaLogin').show();
         accesoDatos.EstablecerUsuarioLogueado(null);
     });
+
+    // Rellenar la tabla de agenda de médicos
+    var propiedadFiltro; 
+    var agendaMedicos = accesoDatos.ObtenerAgendaDeMedicos();
+    rellenarTablaAgendaDeMedicos(agendaMedicos);
+
+    $('#slcCampoFiltro').change(function() {
+        propiedadFiltro = $(this).val();
+        if (propiedadFiltro !== '') {
+            $('#valorCampoFiltro').attr('disabled', false);
+        } else {
+            $('#valorCampoFiltro').attr('disabled', true);
+        }
+        $('#valorCampoFiltro').attr('placeholder', $(this).val());
+    }); 
+
+    // Se aplica el filtro a los datos obtenidos de la agenda de médicos
+    $('#valorCampoFiltro').keyup(function() {
+        var valor = $(this).val();
+        console.log(valor);
+        if (valor !== '') {
+            var agendaMedicosFiltro = agendaMedicos.filter(medico => medico[propiedadFiltro].startsWith($(this).val()));
+            rellenarTablaAgendaDeMedicos(agendaMedicosFiltro);
+        } else {
+            rellenarTablaAgendaDeMedicos(agendaMedicos);
+        }
+    });
+}
+
+/**
+ * Funciones controladoras de la interfaz gráfica
+ */
+function rellenarTablaAgendaDeMedicos(dataSetMedicos) {
+    $('#tablaAgenda').empty();
+    if (dataSetMedicos.length > 0) {
+        dataSetMedicos.forEach((medico) => {
+            $('#tablaAgenda').append('<tr><td>' + medico.numero + '</td><td>' + medico.nombre + '</td><td>' + medico.especialidad + '</td></tr>');
+        });
+    } else {
+        $('#tablaAgenda').append("<tr><td colspan='3'><p style='text-align: center;'>No hay médicos que concuerden con el criterio de búsqueda</p></td></tr>");
+    }
 }
 
 /**
