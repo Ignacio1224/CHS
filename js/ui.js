@@ -97,7 +97,9 @@ function vistaEscritorioMedico() {
     // Rellenar la tabla de agenda de médicos
     var propiedadFiltro; 
     var agendaMedicos = accesoDatos.ObtenerAgendaDeMedicos();
+    var pacientesTratados = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
     rellenarTablaAgendaDeMedicos(agendaMedicos);
+    rellenarTablaPacientesTratados(pacientesTratados);
 
     $('#slcCampoFiltro').change(function() {
         propiedadFiltro = $(this).val();
@@ -125,6 +127,8 @@ function vistaEscritorioMedico() {
 /**
  * Funciones controladoras de la interfaz gráfica
  */
+
+// Carga la tabla de agenda de medicos 
 function rellenarTablaAgendaDeMedicos(dataSetMedicos) {
     $('#tablaAgenda').empty();
     if (dataSetMedicos.length > 0) {
@@ -133,6 +137,18 @@ function rellenarTablaAgendaDeMedicos(dataSetMedicos) {
         });
     } else {
         $('#tablaAgenda').append("<tr><td colspan='3'><p style='text-align: center;'>No hay médicos que concuerden con el criterio de búsqueda</p></td></tr>");
+    }
+}
+
+// Carga la tabla de pacientes tratados por un medico
+function rellenarTablaPacientesTratados(dataSetPacientes) {
+    $('#tablaPacientesTratados').empty();
+    if (dataSetPacientes.length > 0) {
+        dataSetPacientes.forEach((paciente) => {
+            $('#tablaPacientesTratados').append('<tr><td>' + paciente.fechaAtencion + '</td><td>' + paciente.nombre + '</td><td>' + paciente.motivoConsulta + '</td></tr>');
+        });
+    } else {
+        $('#tablaPacientesTratados').append("<tr><td colspan='3'><p style='text-align: center;'>No has tratado a ningún paciente hasta el momento</p></td></tr>");
     }
 }
 

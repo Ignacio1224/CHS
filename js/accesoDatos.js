@@ -11,22 +11,22 @@ var accesoDatos = (function () {
 
     /** JUEGO DE DATOS */
     var medicos = [{
-            'numero': 123456,
-            'nombre': 'Matias Schmid',
-            'especialidad': 'Medicina General',
-            'clave': 'MSPass32'
+            numero: 123456,
+            nombre: 'Matias Schmid',
+            especialidad: 'Medicina General',
+            clave: 'MSPass32'
         },
         {
-            'numero': 234567,
-            'nombre': 'Ignacio Cabrera',
-            'especialidad': 'Medicina General',
-            'clave': 'ICPass32'
+            numero: 234567,
+            nombre: 'Ignacio Cabrera',
+            especialidad: 'Medicina General',
+            clave: 'ICPass32'
         },
         {
-            'numero': 891011,
-            'nombre': 'Marcelo Medina',
-            'especialidad': 'Cardiología',
-            'clave': 'MMPass32'
+            numero: 891011,
+            nombre: 'Marcelo Medina',
+            especialidad: 'Cardiología',
+            clave: 'MMPass32'
         }
     ];
 
@@ -176,12 +176,19 @@ var accesoDatos = (function () {
         return medicos;
     };
     
-    /*var obtenerAgendaDeMedicos = function (propiedad, valor) {
-        if (propiedad === '') {
-
+    // Obtiene la lista de pacientes tratados por un medico
+    var obtenerPacientesTratados = function(_numero) {
+        if (!isNaN(_numero)) {
+            var consultas = historias.filter(consulta => consulta.numero === _numero);
+            var pacientesTratados = [];
+            consultas.forEach(c => {
+                pacientesTratados.push({ fechaAtencion: c.fecha, nombre: pacientes.filter(p => p.documento === c.documento)[0].nombre, motivoConsulta: c.motivo });
+            });
+            return pacientesTratados;
+        } else {
+            return [];
         }
-        return medicos.filter(medico => medico[propiedad].startsWith(valor));
-    }*/
+    };
 
     // Interfaz pública
     return {
@@ -195,7 +202,8 @@ var accesoDatos = (function () {
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,
         ObtenerHistoria: obtenerHistoria,
-        ObtenerAgendaDeMedicos: obtenerAgendaDeMedicos
+        ObtenerAgendaDeMedicos: obtenerAgendaDeMedicos,
+        ObtenerPacientesTratados: obtenerPacientesTratados
     }
 
 })();
