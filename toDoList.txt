@@ -10,7 +10,7 @@ User Interface in SPA
 
     Finish UI Partner
 
-    Add Behaviour to UI
+        Add Behaviour to UI [ ok ]
 
 
 Back End
@@ -18,11 +18,10 @@ Back End
                 - LogIn [ ok ]
 
     Add Functionalities to Doctor
-        - Add Story
         - View Story
             - Change Password [ ok ]
-        - View Agenda
-        - List Partner
+            - View Agenda [ ok ]
+            - List Partner [ ok ]
         - List Partner in specific date
             - Close Session [ ok ]
 
@@ -44,6 +43,4 @@ Testing
 
 Otros
     - Pasar a funcion la parte de cerrar sesion
-    - Alinear imagenes de grilla de paciente
-    - Hacer tabPane de Doctor
     

@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group" id="ctlGroupDocumento">
                         <label for="txtDocumento" id="lblDocumento">Documento</label>
-                        <input class="form-control" id="txtDocumento" maxlength="7" placeholder="ej: 7896541" onKeyDown="if(event.keyCode==13) ingresar();">
+                        <input class="form-control" id="txtDocumento" maxlength="8" placeholder="ej: 49274397" onKeyDown="if(event.keyCode==13) ingresar();">
                     </div>
                     <div class="form-group">
                         <label for="txtClave" id="lblClave">Clave</label>
@@ -106,7 +106,7 @@
                     <br>
                     <form>
                         <p>Filtrar por</p>
-                        <div class="form-row">    
+                        <div class="form-row">
                             <div class="col">
                                 <select id="slcCampoFiltro" class="form-control form-control-sm">
                                     <option value="">Selecciona...</option>
@@ -258,6 +258,7 @@
     </div>
 
     <!-- Modals -->
+
     <!-- Modal cambiar clave-->
     <div class="modal fade" id="modalCambiarClave" tabindex="-1" role="dialog" aria-labelledby="modalCambiarClaveTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -271,11 +272,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="txtClave">Nueva clave</label>
-                        <input type="password" class="form-control" name="txtClave" id="txtClave">
+                        <input type="password" class="form-control" name="txtClave" id="txtClave" onKeyDown="if(event.keyCode==13) cambiarClave();">
                     </div>
                     <div class="form-group">
                         <label for="txtClaveVerificada">Repite la nueva clave</label>
-                        <input type="password" class="form-control" name="txtClaveVerificada" id="txtClaveVerificada">
+                        <input type="password" class="form-control" name="txtClaveVerificada" id="txtClaveVerificada" onKeyDown="if(event.keyCode==13) cambiarClave();">
                     </div>
                     <div id="divErrorCambiarClave" class="alert alert-danger alert-dismissable"></div>
                 </div>
@@ -310,7 +311,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
     <!-- Modal ver imagen de actuación-->
     <div class="modal fade" id="modalVerImagen" tabindex="-1" role="dialog" aria-labelledby="modalVerImagen" aria-hidden="true">
@@ -327,7 +328,18 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
+
+    <!-- Modal Cambio de contraseña correctamente -->
+    <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="modalSuccess" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content center  alert alert-success">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSuccessTitulo">Contraseña cambiada correctamente</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.js"></script>

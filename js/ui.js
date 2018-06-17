@@ -35,19 +35,23 @@ function ingresar() {
     var perfil = $('#slcPerfil').val();
     var identidad;
     var clave = $('#txtClave').val();
+    var docV = true;
 
     if (perfil === 'M') {
         identidad = Number($('#txtNumero').val());
     } else {
-        identidad = Number($('#txtDocumento').val());
+        docV = validarCI($('#txtDocumento').val());
+        if (docV) {
+            identidad = Number($('#txtDocumento').val());
+        }
     }
 
     /**
-     *  Si la clave no es vacía y tanto el número (en caso de médico) o el documento (en caso de paciente)
+     *  Si la clave no es vacía y tanto el número (en caso de médico) o el documento (en caso de paciente) es valido,
      *  son valores numéricos distintos de 0 buscaremos el usuario en los arrays correspondientes
      *  consultando al módulo de acceso a datos.
      */
-    if (clave !== "" && !isNaN(identidad) && identidad !== 0) {
+    if (clave !== "" && !isNaN(identidad) && identidad !== 0 && docV) {
         var usuario = accesoDatos.ObtenerUsuario({
             _perfil: perfil,
             _identidad: identidad,
@@ -96,7 +100,7 @@ function vistaEscritorioMedico() {
 
     // Rellenar la tabla de agenda de médicos
     var propiedadFiltro; 
-    var agendaMedicos = accesoDatos.ObtenerAgendaDeMedicos();
+    var agendaMedicos = accesoDatos.ObtenerMedicos();
     var pacientesTratados = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
     rellenarTablaAgendaDeMedicos(agendaMedicos);
     rellenarTablaPacientesTratados(pacientesTratados);
@@ -235,6 +239,50 @@ function vistaEscritorioSocio() {
     }
 }
 
+/*
+	invertirTexto [Devuelve un string de _text leido de derecha a izquierda]
+	Input:
+		_text: String
+	Output:
+		_aux: String
+*/
+function invertirTexto(_text) {
+    let _aux = ""
+    for (let i = _text.length; i > -1; i--) {
+        _aux += _text.charAt(i);
+    }
+
+    return _aux;
+}
+
+/*
+	validarCI [Devuelve un booleano si CI es correcta o no]
+	Input:
+		_text: String
+	Output:
+    boolean
+  Note:
+    Esta funcion de pende de ivertirTexto
+*/
+
+function validarCI(ci) {
+    let dv = Number(ci.charAt(ci.length - 1));
+    let digits = ci.slice(0, -1);
+    digits = invertirTexto(digits);
+    let sum = 0;
+    let verifiers = "4367892";
+    let dvf = 0;
+    if (digits.length == 6 || digits.length === 7) {
+        for (let i = 0; i < digits.length; i++) {
+            sum += Number(digits.charAt(i)) * Number(verifiers.charAt(i));
+        }
+    }
+    while (sum % 10 !== 0) {
+        sum++;
+        dvf++;
+    }
+    return dvf === dv;
+}
 
 function cambiarClave() {
     var clave = $('input[name=txtClave]').val();
@@ -244,12 +292,19 @@ function cambiarClave() {
         if (clave !== claveVerificacion) {
             $('#divErrorCambiarClave').html('<span>Las claves que has ingresado deben coincidir</span>');
             $('#divErrorCambiarClave').show();
+        } else if (clave.length < 8) {
+            $('#divErrorCambiarClave').html('<span>La clave debe ser mayor a 8 caracteres</span>');
+            $('#divErrorCambiarClave').show();
         } else {
             accesoDatos.ObtenerUsuarioLogueado().clave = clave;
             console.log(accesoDatos.ObtenerUsuarioLogueado());
             $('#modalCambiarClave').modal('hide');
             $('input[name=txtClave]').val("");
             $('input[name=txtClaveVerificada]').val("");
+
+            $("#modalSuccess").fadeTo(2000, 500).slideUp(500, function () {
+                $("#modalSuccess").slideUp(500);
+            });
         }
     } else {
         $('#divErrorCambiarClave').html('<span>Los campos son obligatorios</span>');

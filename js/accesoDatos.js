@@ -31,7 +31,7 @@ var accesoDatos = (function () {
     ];
 
     var pacientes = [{
-            documento: 7896541,
+            documento: 49274397,
             nombre: 'Mariano Ramos',
             medicocabecera: 123456,
             clave: 'MR1234'
@@ -46,7 +46,7 @@ var accesoDatos = (function () {
 
     var historias = [{
             "historia": 1,
-            "documento": 7896541,
+            "documento": 49274397,
             "numero": 123456,
             "fecha": "2018 - 02 - 20", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
@@ -56,7 +56,7 @@ var accesoDatos = (function () {
         },
         {
             "historia": 2,
-            "documento": 7896541,
+            "documento": 49274397,
             "numero": 234567,
             "fecha": "2018 - 08 - 03", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
@@ -170,11 +170,6 @@ var accesoDatos = (function () {
         }
         return hist;
     };
-
-    // Obtiene la agenda de medicos de la institución
-    var obtenerAgendaDeMedicos = function() {
-        return medicos;
-    };
     
     // Obtiene la lista de pacientes tratados por un medico
     var obtenerPacientesTratados = function(_numero) {
@@ -202,7 +197,6 @@ var accesoDatos = (function () {
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,
         ObtenerHistoria: obtenerHistoria,
-        ObtenerAgendaDeMedicos: obtenerAgendaDeMedicos,
         ObtenerPacientesTratados: obtenerPacientesTratados
     }
 
