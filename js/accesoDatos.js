@@ -37,7 +37,7 @@ var accesoDatos = (function () {
             clave: 'MR1234'
         },
         {
-            documento: 3421345,
+            documento: 51619074,
             nombre: 'Susana Garrido',
             medicocabecera: 234567,
             clave: 'SG1234'
@@ -66,7 +66,7 @@ var accesoDatos = (function () {
         },
         {
             "historia": 1,
-            "documento": 3421345,
+            "documento": 51619074,
             "numero": 123456,
             "fecha": "2018 - 09 - 07", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
@@ -76,7 +76,7 @@ var accesoDatos = (function () {
         },
         {
             "historia": 2,
-            "documento": 3421345,
+            "documento": 51619074,
             "numero": 234567,
             "fecha": "2018 - 12 - 24", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
@@ -151,11 +151,29 @@ var accesoDatos = (function () {
 
     // Obtiene un nombre de paciente de la lista a partir de su documento de identidad
     var obtenerNombrePaciente = function (_documento) {
-        for (let i = 0, l = medicos.length; i < l; i++) {
+        var aux = false;
+        for (let i = 0, l = pacientes.length; i < l; i++) {
             if (pacientes[i].documento === _documento) {
                 return pacientes[i].nombre;
+            } else {
+                aux = true;
             }
         }
+        
+        if (aux) {
+            return null;
+        }
+    };
+    
+    // Obtiene documentos de pacientes de la lista a partir de su nombre, como el nombre no es CP se devuelve un array con todas las CI con ese nombre
+    var obtenerDocumentos = function (_nombre) {
+        var cis = [];
+        for (let i = 0, l = pacientes.length; i < l; i++) {
+            if (pacientes[i].nombre === _nombre) {
+                cis.push(pacientes[i].documento);
+            }
+        }
+        return cis;
     };
 
     // Obtiene una historia de paciente de la lista a partir de su documento de identidad
@@ -196,6 +214,7 @@ var accesoDatos = (function () {
         ObtenerEspecialidad: obtenerEspecialidad,
         ObtenerPaciente: obtenerPaciente,
         ObtenerNombrePaciente: obtenerNombrePaciente,
+        ObtenerDocumentos: obtenerDocumentos,
         ObtenerHistoria: obtenerHistoria,
         ObtenerPacientesTratados: obtenerPacientesTratados
     }

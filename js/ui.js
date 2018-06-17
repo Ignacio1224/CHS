@@ -99,13 +99,13 @@ function vistaEscritorioMedico() {
     });
 
     // Rellenar la tabla de agenda de médicos
-    var propiedadFiltro; 
+    var propiedadFiltro;
     var agendaMedicos = accesoDatos.ObtenerMedicos();
     var pacientesTratados = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
     rellenarTablaAgendaDeMedicos(agendaMedicos);
     rellenarTablaPacientesTratados(pacientesTratados);
 
-    $('#slcCampoFiltro').change(function() {
+    $('#slcCampoFiltro').change(function () {
         propiedadFiltro = $(this).val();
         if (propiedadFiltro !== '') {
             $('#valorCampoFiltro').attr('disabled', false);
@@ -113,12 +113,12 @@ function vistaEscritorioMedico() {
             $('#valorCampoFiltro').attr('disabled', true);
         }
         $('#valorCampoFiltro').attr('placeholder', $(this).val());
-    }); 
+    });
 
     // Se aplica el filtro a los datos obtenidos de la agenda de médicos
-    $('#valorCampoFiltro').keyup(function() {
+    $('#valorCampoFiltro').keyup(function () {
         var valor = $(this).val();
-        console.log(valor);
+
         if (valor !== '') {
             var agendaMedicosFiltro = agendaMedicos.filter(medico => medico[propiedadFiltro].startsWith($(this).val()));
             rellenarTablaAgendaDeMedicos(agendaMedicosFiltro);
@@ -126,11 +126,97 @@ function vistaEscritorioMedico() {
             rellenarTablaAgendaDeMedicos(agendaMedicos);
         }
     });
+
+    /** Rellenar tabla de busqueda de historia clinica */
+
+    $('#slcCampoFiltroHC').change(function () {
+        $('#valorCampoFiltroHC').val("");
+        var fBusqueda = $(this).val();
+        $("#tHCF").empty();
+        if (fBusqueda !== '') {
+            $('#valorCampoFiltroHC').attr('disabled', false);
+        } else {
+            $('#valorCampoFiltroHC').attr('disabled', true);
+        }
+        $('#valorCampoFiltroHC').attr('placeholder', fBusqueda);
+        $('#errorB').html("<span class='col'>No has buscado nada ah&uacute;n</span>")
+        $('#errorB').show()
+    });
+
+    var vBusqueda;
+    $('#valorCampoFiltroHC').keyup(function () {
+        vBusqueda = $(this).val();
+        if (vBusqueda !== '') {
+            if ($('#slcCampoFiltroHC').val() === 'documento') {
+                rellenarTablaHCB(Number(vBusqueda));
+            } else if ($('#slcCampoFiltroHC').val() === 'nombre') {
+                rellenarTablaHCB(vBusqueda);
+            }
+        }
+    });
+
 }
 
 /**
  * Funciones controladoras de la interfaz gráfica
  */
+
+// Cargar la tabla de historias clinicas de un paciente
+function rellenarTablaHCB(valor) {
+    $('#errorB').hide();
+    $("#tHCF").empty();
+
+    if (typeof (valor) === 'number') {
+        if (validarCI(String(valor)) && String(valor).length >= 7 && String(valor).length <= 8) {
+            if (accesoDatos.ObtenerNombrePaciente(valor) !== null) {
+                $("#tHCF").html("<thead><tr><th>Nombre</th><th>Fecha</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id='tablaHCF'></tbody>");
+
+                let his = accesoDatos.ObtenerHistoria(valor);
+                for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
+                    fechan = his[j].fecha.split(" - ");
+                    $('#tablaHCF').append(`<tr id='k${j}'></tr>`);
+                    $(`#k${j}`).append("<td>" + accesoDatos.ObtenerNombrePaciente(his[j].documento) + "</td>")
+                    $(`#k${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+                    $(`#k${j}`).append("<td>" + his[j].motivo + "</td>");
+                    $(`#k${j}`).append("<td>" + his[j].diagnostico + "</td>");
+                    $(`#k${j}`).append("<td>" + his[j].prescripcion + "</td>");
+                    $(`#k${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + his[j].imagen + "'/></td>");
+                }
+            } else {
+                $('#errorB').html("<span class='col'>No existe un paciente con este documento</span>")
+                $('#errorB').show()
+            }
+        } else {
+            $('#errorB').html("<span class='col'>Documento no v&aacute;llido</span>")
+            $('#errorB').show()
+        }
+    } else {
+        if (accesoDatos.ObtenerDocumentos(valor).length > 0) {
+            $("#tHCF").html("<thead><tr><th>Documento</th><th>Fecha</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id='tablaHCF'></tbody>");
+
+            var cis = accesoDatos.ObtenerDocumentos(valor);
+
+            cis.forEach((c, i) => {
+                let his = accesoDatos.ObtenerHistoria(c);
+                for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
+                    $('#tablaHCF').append(`<tr id='l${i}${j}'></tr>`);
+
+                    fechan = his[j].fecha.split(" - ");
+                    $(`#l${i}${j}`).append("<td>" + his[j].documento + "</td>")
+                    $(`#l${i}${j}`).append("<td>" + fechan[2] + " - " + fechan[1] + " - " + fechan[0] + "</td>");
+                    $(`#l${i}${j}`).append("<td>" + his[j].motivo + "</td>");
+                    $(`#l${i}${j}`).append("<td>" + his[j].diagnostico + "</td>");
+                    $(`#l${i}${j}`).append("<td>" + his[j].prescripcion + "</td>");
+                    $(`#l${i}${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + his[j].imagen + "'/></td>");
+                }
+            });
+        } else {
+            $('#errorB').html("<span class='col'>No existe un usuario con este nombre</span>")
+            $('#errorB').show()
+        }
+    }
+
+}
 
 // Carga la tabla de agenda de medicos 
 function rellenarTablaAgendaDeMedicos(dataSetMedicos) {
@@ -231,7 +317,7 @@ function vistaEscritorioSocio() {
             j = im;
             $('#gallery').append(`<div class="card-deck" id="${j}">`);
         }
-        
+
         fechan = st[k].fecha.split(" - ");
         $(`#${j}`).append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${fechan[2] + ' - ' + fechan[1] + ' - ' + fechan[0]}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
 
@@ -316,7 +402,7 @@ function cargarCmbMedico() {
     let med = accesoDatos.ObtenerMedicos();
     $('#sCambiarMedico').html("");
     for (let i = 0, l = med.length; i < l; i++) {
-        if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera && accesoDatos.ObtenerEspecialidad(accesoDatos.ObtenerUsuarioLogueado().medicocabecera) === "Medicina General") {
+        if (med[i].numero !== accesoDatos.ObtenerUsuarioLogueado().medicocabecera && med[i].especialidad === "Medicina General") {
             $('#sCambiarMedico').append(`<option value='${med[i].numero}'>${med[i].nombre}</option>`);
         }
     }
