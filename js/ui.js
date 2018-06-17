@@ -76,7 +76,6 @@ function ingresar() {
                 $('#vistaEscritorioSocio').show(vistaEscritorioSocio);
             }
 
-            //console.log(accesoDatos.ObtenerUsuarioLogueado());
         } else {
             $('#divError').html('<span>No existe el usuario</span>');
             $('#divError').show();
@@ -216,6 +215,14 @@ function rellenarTablaHCB(valor) {
         }
     }
 
+    $('#tHCF a').click(e => {
+        e.preventDefault();
+        let rutaAbsoluta = e.target.src;
+        let nombreFoto = rutaAbsoluta.substr(rutaAbsoluta.lastIndexOf('/') + 1);
+        $('#imgModalActuacion').attr('src', '../images/' + nombreFoto);
+        $('#modalVerImagen').modal('show');
+    });
+
 }
 
 // Carga la tabla de agenda de medicos 
@@ -287,16 +294,13 @@ function vistaEscritorioSocio() {
         $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
         $(`#t${j}`).append("<td>" + st[j].prescripcion + "</td>");
         $(`#t${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
-        //$(`#t${j}`).append("<td> <img width='40px' height='40px' src='" + st[j].imagen + "'/></td>");
     }
 
     // Conectar eventos en cada miniatura de imagen de actuación al popup con la imagen correspondiente ampliada.
     $('#tablaHistorias a').click(e => {
         e.preventDefault();
-        console.log($(this));
         let rutaAbsoluta = e.target.src;
         let nombreFoto = rutaAbsoluta.substr(rutaAbsoluta.lastIndexOf('/') + 1);
-        console.log(rutaAbsoluta.substr(rutaAbsoluta.lastIndexOf('/') + 1));
         $('#imgModalActuacion').attr('src', '../images/' + nombreFoto);
         $('#modalVerImagen').modal('show');
     });
@@ -383,7 +387,6 @@ function cambiarClave() {
             $('#divErrorCambiarClave').show();
         } else {
             accesoDatos.ObtenerUsuarioLogueado().clave = clave;
-            console.log(accesoDatos.ObtenerUsuarioLogueado());
             $('#modalCambiarClave').modal('hide');
             $('input[name=txtClave]').val("");
             $('input[name=txtClaveVerificada]').val("");
@@ -411,7 +414,6 @@ function cargarCmbMedico() {
 function cambiarMedico() {
     var medico = $('select[name=cmbCambiarMedico]').val();
     accesoDatos.ObtenerUsuarioLogueado().medicocabecera = Number(medico);
-    console.log(accesoDatos.ObtenerUsuarioLogueado());
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').modal('hide');
     $('#modalCambiarMedico').on('hidden.bs.modal', cargarCmbMedico());
