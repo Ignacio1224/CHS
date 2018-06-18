@@ -181,13 +181,17 @@ function rellenarTablaHCB(valor) {
                     $(`#k${j}`).append("<td>" + his[j].prescripcion + "</td>");
                     $(`#k${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + his[j].imagen + "'/></td>");
                 }
+                $('#btnAgregar').attr('disabled', false);
+                $('#btnAgregar').css('margin-left', '1em');
             } else {
-                $('#errorB').html("<span class='col'>No existe un paciente con este documento</span>")
+                $('#errorB').html("No existe un paciente con este documento")
                 $('#errorB').show()
+                $('#btnAgregar').attr('disabled', true);
             }
         } else {
-            $('#errorB').html("<span class='col'>Documento no v&aacute;llido</span>")
+            $('#errorB').html("Documento no v&aacute;llido")
             $('#errorB').show()
+            $('#btnAgregar').attr('disabled', true);
         }
     } else {
         if (accesoDatos.ObtenerDocumentos(valor).length > 0) {
@@ -209,9 +213,12 @@ function rellenarTablaHCB(valor) {
                     $(`#l${i}${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + his[j].imagen + "'/></td>");
                 }
             });
+                $('#btnAgregar').attr('disabled', false);
+                $('#btnAgregar').css('margin-left', '1em');
         } else {
-            $('#errorB').html("<span class='col'>No existe un usuario con este nombre</span>")
+            $('#errorB').html("No existe un usuario con este nombre")
             $('#errorB').show()
+            $('#btnAgregar').attr('disabled', true);
         }
     }
 
@@ -274,7 +281,7 @@ function vistaEscritorioSocio() {
         $('#vistaEscritorioSocio').hide();
         $('#vistaLogin').show();
         accesoDatos.EstablecerUsuarioLogueado(null);
-    });
+    })
 
     let st = []
     for (let i = 0, l = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento).length; i < l; i++) {
