@@ -429,5 +429,22 @@ function cambiarMedico() {
 }
 
 function agregarHC() {
-    alert("HOLA");
+    let motivo = $('#txtMotivo').val();
+    let diagnostico = $('#txtDiagnostico').val();
+    let prescripcion = $('#txtPrescripcion').val();
+    let img = $('#fileImagen').val();
+
+    if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && img !== "") {
+        if (img.substr(img.length - 4, img.length - 1) === ".jpg") {
+            $('#divErrorAgregarHC').hide();
+            accesoDatos.AgregarHistoria($('#valorCampoFiltroHC').val(), accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
+            
+        } else {
+            $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
+            $('#divErrorAgregarHC').show();
+        }
+    } else {
+        $('#divErrorAgregarHC').html("<span>No pueden quedar campos vac&iacute;os</span>");
+        $('#divErrorAgregarHC').show();
+    }
 }

@@ -188,6 +188,16 @@ var accesoDatos = (function () {
         }
         return hist;
     };
+
+    // Agrega una historia del paciente
+    var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
+        let date = Date.now();
+        let fecha = date.getYear() + " - " + date.getMonth() + " - " + date.getDay();
+        let _historia = obtenerHistoria(_documento)[obtenerHistoria(_documento).length - 1].historia +1;
+
+        console.log(_historia, _documento, _numero, _fecha, _motivo, _diagnostico, _prescripcion, _imagen);
+        
+    };
     
     // Obtiene la lista de pacientes tratados por un medico
     var obtenerPacientesTratados = function(_numero) {
@@ -216,6 +226,7 @@ var accesoDatos = (function () {
         ObtenerNombrePaciente: obtenerNombrePaciente,
         ObtenerDocumentos: obtenerDocumentos,
         ObtenerHistoria: obtenerHistoria,
+        AgregarHistoria: agregarHistoria,
         ObtenerPacientesTratados: obtenerPacientesTratados
     }
 
