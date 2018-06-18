@@ -115,7 +115,7 @@
                         <div class="row">
                             <span class="col" style="text-align: center; margin-top: 1em;" id="errorB">No has buscado nada ahún</span>
                             <!-- <br> -->
-                            <button type="button" class="btn btn-success" id="btnAgregar" disabled>Agregar Historia</button>
+                            <button type="button" class="btn btn-success" id="btnAgregar" href="#modalAgregarHC" data-toggle="modal" disabled>Agregar Historia</button>
                         </div>
                     </form>
                     <br>
@@ -359,6 +359,42 @@
             <div class="modal-content center  alert alert-success">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalSuccessTitulo">Contraseña cambiada correctamente</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalAgregarHC" tabindex="-1" role="dialog" aria-labelledby="modalAgregarHCTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarHCTitulo">Agregar Historia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txtMotivo">Motivo</label>
+                        <input type="text-area" class="form-control" name="txtMotivo" id="txtMotivo" onKeyDown="if(event.keyCode==13) ;">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDiagnostico">Diagnostico</label>
+                        <input type="text-area" class="form-control" name="txtDiagnostico" id="txtDiagnostico" onKeyDown="if(event.keyCode==13);">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPrescripcion">Prescripci&oacute;n</label>
+                        <input type="text-area" class="form-control" name="txtPrescripcion" id="txtPrescripcion" onKeyDown="if(event.keyCode==13);">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtImagen">Im&aacute;gen</label>
+                        <input type="file" class="form-control" name="txtImagen" id="txtImagen" onKeyDown="if(event.keyCode==13);">
+                    </div>
+                    <div id="divErrorAgregarHC" class="alert alert-danger alert-dismissable"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="btnAgregarHC">Agregar</button>
                 </div>
             </div>
         </div>

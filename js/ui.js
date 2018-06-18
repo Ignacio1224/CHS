@@ -3,6 +3,7 @@ $(document).ready(mostrarCuadroLogin);
 $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
 $('#btnCambiarMedico').click(cambiarMedico);
+$('#btnAgregarHC').click(agregarHC);
 
 
 /**
@@ -140,6 +141,7 @@ function vistaEscritorioMedico() {
         $('#valorCampoFiltroHC').attr('placeholder', fBusqueda);
         $('#errorB').html("<span class='col'>No has buscado nada ah&uacute;n</span>")
         $('#errorB').show()
+        $('#btnAgregar').attr('disabled', true);
     });
 
     var vBusqueda;
@@ -424,4 +426,8 @@ function cambiarMedico() {
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').modal('hide');
     $('#modalCambiarMedico').on('hidden.bs.modal', cargarCmbMedico());
+}
+
+function agregarHC() {
+    alert("HOLA");
 }
