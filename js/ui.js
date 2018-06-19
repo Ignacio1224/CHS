@@ -244,19 +244,21 @@ function rellenarTablaHCB(valor) {
 // Carga la tabla de pacientes por dia de atencion
 function rellenarTablaHCBD() {
     if ($(this).val() !== '') {
+        $('#errorD').hide();
+        $('#tablaPacientesTratadosDia').html('<thead><tr><th>Documento</th><th>Nombre</th></tr></thead><tbody id="tbPTD"></tbody>')
         let ff = $(this).val().split(' - ');
         let pac = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
         for (let i = 0, lp = pac.length; i < lp; i++) {
-            console.log(accesoDatos.ObtenerHistoria(pac[i].documento).fecha);
-            
-            if (accesoDatos.ObtenerHistoria(pac[i].documento).fecha === (ff[2] + " - " + ff[1] + ' - ' + ff[0])){
-                $('#tablaPacientesTratadosDia').append(`<tr id="${i}"></tr>`);
-                $(`#${i}`).append(pac[i].documento);
-                $(`#${i}`).append(accesoDatos.ObtenerNombrePaciente(pac[i].documento));
+            if (accesoDatos.ObtenerHistoria(pac[i].documento)[i].fecha === (ff[2] + " - " + ff[1] + ' - ' + ff[0])){
+                $('#tbPTD').append(`<tr id="${i}"></tr>`);
+                $(`#${i}`).append(`<td>${pac[i].documento}</td>`);
+                $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pac[i].documento)}</td>`);
             }
         }
     } else {
-        $('#errorD').val('No has buscado nada ah&uacute;n')
+        $('#tablaPacientesTratadosDia').html("")
+        $('#errorD').val('No has buscado nada ah&uacute;n');
+        $('#errorD').show();
     }
 }
 
