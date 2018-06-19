@@ -151,6 +151,7 @@ function vistaEscritorioMedico() {
             if ($('#slcCampoFiltroHC').val() === 'documento') {
                 rellenarTablaHCB(Number(vBusqueda));
             } else if ($('#slcCampoFiltroHC').val() === 'nombre') {
+                 $('#modal-AHCn').prepend('<div class="form-group"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
                 rellenarTablaHCB(vBusqueda);
             }
         }
@@ -215,8 +216,8 @@ function rellenarTablaHCB(valor) {
                     $(`#l${i}${j}`).append("<td> <a href='#' data-toggle='modal'><img width='40px' height='40px' src='" + his[j].imagen + "'/></td>");
                 }
             });
-                $('#btnAgregar').attr('disabled', false);
-                $('#btnAgregar').css('margin-left', '1em');
+            $('#btnAgregar').attr('disabled', false);
+            $('#btnAgregar').css('margin-left', '1em');
         } else {
             $('#errorB').html("No existe un usuario con este nombre")
             $('#errorB').show()
@@ -429,16 +430,34 @@ function cambiarMedico() {
 }
 
 function agregarHC() {
-    let motivo = $('#txtMotivo').val();
+    let doc;
+    if ($('#slcCampoFiltroHC').val() === 'nombre') {
+        doc = Number($('#txtDoc').val());
+
+    } else {
+        doc = Number($('#valorCampoFiltroHC').val());
+    }
+    let motivo = $('#txtMotivo').val();;
     let diagnostico = $('#txtDiagnostico').val();
     let prescripcion = $('#txtPrescripcion').val();
     let img = $('#fileImagen').val();
 
     if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && img !== "") {
-        if (img.substr(img.length - 4, img.length - 1) === ".jpg") {
+        if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
             $('#divErrorAgregarHC').hide();
-            accesoDatos.AgregarHistoria($('#valorCampoFiltroHC').val(), accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
-            
+            img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
+            let validation = accesoDatos.AgregarHistoria(doc, accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
+            if (validation) {
+                $('#txtMotivo').val("");
+                $('#txtDiagnostico').val("");
+                $('#txtPrescripcion').val("");
+                $('#fileImagen').val("");
+                $('#btnAgregarHC').attr('data-dismiss', "modal");
+                $('#modalSuccessHC').fadeTo(2000, 500).slideUp(500, function () {
+                    $('#modalSuccessHC').slideUp(500);
+                });
+                rellenarTablaHCB(doc);
+            }
         } else {
             $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
             $('#divErrorAgregarHC').show();

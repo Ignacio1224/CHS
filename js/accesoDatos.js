@@ -127,12 +127,12 @@ var accesoDatos = (function () {
             }
         }
     };
-    
+
     // Obtiene todos los medicos de la lista
     var obtenerMedicos = function () {
         return medicos;
     };
-    
+
     // Obtiene la especialidad del medico de la lista por su numero
     var obtenerEspecialidad = function (_numero) {
         for (let i = 0, l = medicos.length; i < l; i++) {
@@ -141,7 +141,7 @@ var accesoDatos = (function () {
             }
         }
     };
-    
+
     // Obtiene un paciente de la lista a partir de su documento de identidad
     var obtenerPaciente = function (_documento, _clave) {
         return pacientes.filter(function (paciente) {
@@ -159,12 +159,12 @@ var accesoDatos = (function () {
                 aux = true;
             }
         }
-        
+
         if (aux) {
             return null;
         }
     };
-    
+
     // Obtiene documentos de pacientes de la lista a partir de su nombre, como el nombre no es CP se devuelve un array con todas las CI con ese nombre
     var obtenerDocumentos = function (_nombre) {
         var cis = [];
@@ -191,21 +191,37 @@ var accesoDatos = (function () {
 
     // Agrega una historia del paciente
     var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
-        let date = Date.now();
-        let fecha = date.getYear() + " - " + date.getMonth() + " - " + date.getDay();
-        let _historia = obtenerHistoria(_documento)[obtenerHistoria(_documento).length - 1].historia +1;
-
-        console.log(_historia, _documento, _numero, _fecha, _motivo, _diagnostico, _prescripcion, _imagen);
-        
+        let _date = new Date();
+        let _fecha = _date.getFullYear() + " - " + (_date.getMonth() + 1) + " - " + _date.getDate();
+        let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
+        try {
+            historias.push({
+                'historia': _historia,
+                'documento': _documento,
+                'numero': _numero,
+                'fecha': _fecha,
+                'motivo': _motivo,
+                'diagnostico': _diagnostico,
+                'prescripcion': _prescripcion,
+                'imagen': _imagen
+            });
+            return true;
+        } catch (error) {
+            return false;
+        }
     };
-    
+
     // Obtiene la lista de pacientes tratados por un medico
-    var obtenerPacientesTratados = function(_numero) {
+    var obtenerPacientesTratados = function (_numero) {
         if (!isNaN(_numero)) {
             var consultas = historias.filter(consulta => consulta.numero === _numero);
             var pacientesTratados = [];
             consultas.forEach(c => {
-                pacientesTratados.push({ fechaAtencion: c.fecha, nombre: pacientes.filter(p => p.documento === c.documento)[0].nombre, motivoConsulta: c.motivo });
+                pacientesTratados.push({
+                    fechaAtencion: c.fecha,
+                    nombre: pacientes.filter(p => p.documento === c.documento)[0].nombre,
+                    motivoConsulta: c.motivo
+                });
             });
             return pacientesTratados;
         } else {

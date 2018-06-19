@@ -373,7 +373,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal-AHCn">
                     <div class="form-group">
                         <label for="txtMotivo">Motivo</label>
                         <input type="text-area" class="form-control" name="txtMotivo" id="txtMotivo" onKeyDown="if(event.keyCode==13) agregarHC();">
@@ -395,6 +395,17 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-success" id="btnAgregarHC">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Historia Clinica correctamente -->
+    <div class="modal fade" id="modalSuccessHC" tabindex="-1" role="dialog" aria-labelledby="modalSuccessHC" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content center  alert alert-success">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSuccessHCTitulo">Consulta agregada correctamente</h5>
                 </div>
             </div>
         </div>
