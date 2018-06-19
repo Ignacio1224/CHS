@@ -179,11 +179,37 @@ var accesoDatos = (function () {
     // Obtiene una historia de paciente de la lista a partir de su documento de identidad
     var obtenerHistoria = function (_documento) {
         let hist = [];
-        let ind = 0;
+        let diag, pres, im, mot;
         for (let i = 0, l = historias.length; i < l; i++) {
             if (historias[i].documento === _documento) {
-                hist[ind] = historias[i];
-                ind++;
+                if (historias[i].diagnostico === ""){
+                    diag = "Sin diagnóstico";
+                } else {
+                    diag = historias[i].diagnostico;
+                }
+                
+                if (historias[i].prescripcion === "") {
+                    pres = "Sin prescripción";
+                } else {
+                    pres = historias[i].prescripcion;
+                }
+                
+                if (historias[i].motivo === "") {
+                    mot = "Sin motivo";
+                } else {
+                    mot = historias[i].motivo;
+                }
+
+                hist.push({
+                    "historia": historias[i].historia,
+                    "documento": historias[i].documento,
+                    "numero": historias[i].numero,
+                    "fecha": historias[i].fecha,
+                    "motivo": mot,
+                    "diagnostico": diag,
+                    "prescripcion": pres,
+                    "imagen": historias[i].imagen
+                });
             }
         }
         return hist;

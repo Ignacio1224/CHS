@@ -115,7 +115,8 @@
                         </div>
                         <div class="row">
                             <span class="col" style="text-align: center; margin-top: 1em;" id="errorB">No has buscado nada ahún</span>
-                            <button type="button" class="btn btn-success" id="btnAgregar" href="#modalAgregarHC" data-toggle="modal" disabled>Agregar Historia</button>
+                            <button type="button" class="btn btn-success" id="btnAgregar" style="margin-left: 1em;" href="#modalAgregarHC" data-toggle="modal"
+                                disabled>Agregar Historia</button>
                         </div>
                     </form>
                     <br>
@@ -191,7 +192,7 @@
                         </div>
                     </form>
                     <br>
-                    <table class="table table-striped table-bordered" style="width:100%"  id="tablaPacientesTratadosDia">
+                    <table class="table table-striped table-bordered" style="width:100%" id="tablaPacientesTratadosDia">
                         <!-- Contenido de la tabla -->
                     </table>
                 </div>
@@ -251,42 +252,20 @@
             <div class="tab-content" id="nav-tabContentSocio">
                 <div class="tab-pane fade show active" id="nav-clinic-history" role="tabpanel" aria-labelledby="nav-ch-tab">
                     <br>
-                    <table class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width: 12%">Fecha</th>
-                                <th>M&eacute;dico</th>
-                                <th>Motivo</th>
-                                <th>Diagn&oacute;stico</th>
-                                <th>Prescripci&oacute;n</th>
-                                <th>Imagen</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaHistorias">
-                            <!-- Contenido de la Tabla -->
-                        </tbody>
+                    <table class="table table-striped table-bordered" style="width:100%" id="tH">
+
                     </table>
                 </div>
                 <div class="tab-pane fade" id="nav-medical-history" role="tabpanel" aria-labelledby="nav-medicalHistory-tab">
                     <br>
-                    <table class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width: 24%">Fecha de consulta</th>
-                                <th>M&eacute;dico</th>
-                                <th>Especialidad</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaMedicosConsultados">
-                            <!-- Contenido de la Tabla -->
-                        </tbody>
+                    <table class="table table-striped table-bordered" style="width:100%" id="tMC">
+
                     </table>
                 </div>
 
                 <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
                     <br>
                     <div class="container">
-                        <!-- <div class="row" id="gallery"></div> -->
                         <!-- Galeria de Imagenes -->
                         <div class="row">&nbsp;</div>
                         <div id="gallery"></div>
@@ -339,7 +318,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="sCambiarMedico">Nuevo M&eacute;dico</label>
+                        <label for="sCambiarMedico" id="lblmr">Nuevo M&eacute;dico</label>
                         <select id="sCambiarMedico" class="form-control" name="cmbCambiarMedico"></select>
                         <!-- <input type="password" class="form-control" name="txtClave" id="txtClave"> -->
                     </div>
