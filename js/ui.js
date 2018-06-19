@@ -4,6 +4,10 @@ $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
 $('#btnCambiarMedico').click(cambiarMedico);
 $('#btnAgregarHC').click(agregarHC);
+$("#datepicker").datepicker({
+    maxDate: 0,
+    dateFormat: 'dd - mm - yy'
+});
 
 
 /**
@@ -157,6 +161,8 @@ function vistaEscritorioMedico() {
         }
     });
 
+    $('#datepicker').change(rellenarTablaHCBD);
+
 }
 
 /**
@@ -233,6 +239,25 @@ function rellenarTablaHCB(valor) {
         $('#modalVerImagen').modal('show');
     });
 
+}
+
+// Carga la tabla de pacientes por dia de atencion
+function rellenarTablaHCBD() {
+    if ($(this).val() !== '') {
+        let ff = $(this).val().split(' - ');
+        let pac = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
+        for (let i = 0, lp = pac.length; i < lp; i++) {
+            console.log(accesoDatos.ObtenerHistoria(pac[i].documento).fecha);
+            
+            if (accesoDatos.ObtenerHistoria(pac[i].documento).fecha === (ff[2] + " - " + ff[1] + ' - ' + ff[0])){
+                $('#tablaPacientesTratadosDia').append(`<tr id="${i}"></tr>`);
+                $(`#${i}`).append(pac[i].documento);
+                $(`#${i}`).append(accesoDatos.ObtenerNombrePaciente(pac[i].documento));
+            }
+        }
+    } else {
+        $('#errorD').val('No has buscado nada ah&uacute;n')
+    }
 }
 
 // Carga la tabla de agenda de medicos 

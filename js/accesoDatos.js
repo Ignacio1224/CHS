@@ -220,7 +220,8 @@ var accesoDatos = (function () {
                 pacientesTratados.push({
                     fechaAtencion: c.fecha,
                     nombre: pacientes.filter(p => p.documento === c.documento)[0].nombre,
-                    motivoConsulta: c.motivo
+                    motivoConsulta: c.motivo,
+                    documento: c.documento
                 });
             });
             return pacientesTratados;

@@ -18,7 +18,8 @@ Back End
                 - LogIn [ ok ]
 
     Add Functionalities to Doctor
-        - View Story
+            - Add Story [ ok ]
+            - View Story [ ok ]
             - Change Password [ ok ]
             - View Agenda [ ok ]
             - List Partner [ ok ]
