@@ -163,7 +163,6 @@ function vistaEscritorioMedico() {
     });
 
     $('#datepicker').change(rellenarTablaHCBD);
-
 }
 
 /**
@@ -271,6 +270,24 @@ function rellenarTablaHCBD() {
                 $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pac[i].documento)}</td>`);
             }
         }
+
+        $('#tbPTD tr td').click(e => {
+            e.preventDefault();
+            var docum;
+            
+
+            if ((e.target.outerText.length === 8 || e.target.outerText.length === 7) && !isNaN(e.target.outerText)) {
+                docum = Number(e.target.outerText);
+                $('#slcCampoFiltroHC').val("documento");
+            } else {
+                docum = e.target.outerText;
+                $('#slcCampoFiltroHC').val("nombre");                
+            }
+            $('#valorCampoFiltroHC').val(docum);
+            rellenarTablaHCB(docum);
+            $('.nav-tabs a[href="#nav-clinic-search"]').tab('show');
+        });
+
     } else {
         $('#tablaPacientesTratadosDia').html("")
         $('#errorD').val('No has buscado nada ah&uacute;n');

@@ -78,7 +78,7 @@ var accesoDatos = (function () {
             "historia": 2,
             "documento": 51619074,
             "numero": 234567,
-            "fecha": "2018 - 12 - 24", // YYYY - MM - DD
+            "fecha": "2018 - 01 - 24", // YYYY - MM - DD
             "motivo": "Texto del motivo de la consulta…",
             "diagnostico": "Texto del diagnóstico del médico….",
             "prescripcion": "Texto de la prescripción del médico...",
