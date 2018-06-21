@@ -278,16 +278,17 @@ function rellenarTablaHCBD() {
             }
         }
 
-        $('#tbPTD tr td').click(e => {
+        $('#tbPTD tr td').click((e) => {
             e.preventDefault();
             var docum;
 
+            console.log(e);
 
-            if ((e.target.outerText.length === 8 || e.target.outerText.length === 7) && !isNaN(e.target.outerText)) {
-                docum = Number(e.target.outerText);
+            if ((e.target.innerText.length === 8 || e.target.innerText.length === 7) && !isNaN(e.target.innerText)) {
+                docum = Number(e.target.innerText);
                 $('#slcCampoFiltroHC').val("documento");
             } else {
-                docum = e.target.outerText;
+                docum = e.target.innerText;
                 $('#slcCampoFiltroHC').val("nombre"); 
                 $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
                 $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
