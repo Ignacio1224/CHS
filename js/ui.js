@@ -288,7 +288,8 @@ function rellenarTablaHCBD() {
                 $('#slcCampoFiltroHC').val("documento");
             } else {
                 docum = e.target.outerText;
-                $('#slcCampoFiltroHC').val("nombre");                
+                $('#slcCampoFiltroHC').val("nombre"); 
+                $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
                 $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
                 $('#txtDoc').show();
             }
@@ -530,7 +531,7 @@ function agregarHC() {
     let img = $('#fileImagen').val();
 
     if ($('#slcCampoFiltroHC').val() === 'nombre') {
-        doc = $('#txtDoc').val();
+        doc = Number($('#txtDoc').val());
         console.log(doc);
         
     } else {
