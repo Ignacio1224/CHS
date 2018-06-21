@@ -46,5 +46,4 @@ Otros
     - Los modals de aviso de cambio de contraseña y de agregacion de HC correcta ver si se pueden poner en 1 solo para reducir codigo
     - poner las consultas en fechas ordenadas segun el numero de historia (las fechas tienen que ser menores a hoy)
     - hacer el testing de la app segun lo que dio el profe
-    - Ver si se va a mostrar el id de consulta, porque en la letra no se pide pero en el testing que paso el profe se menciona
     

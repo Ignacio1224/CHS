@@ -448,7 +448,7 @@ function invertirTexto(_text) {
 	Output:
     boolean
   Note:
-    Esta funcion de pende de ivertirTexto
+    Esta funcion depende de ivertirTexto
 */
 
 function validarCI(ci) {
