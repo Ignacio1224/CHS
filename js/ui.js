@@ -139,9 +139,18 @@ function vistaEscritorioMedico() {
         $("#tHCF").empty();
         if (fBusqueda !== '') {
             $('#valorCampoFiltroHC').attr('disabled', false);
+
+            if ($('#slcCampoFiltroHC').val() === 'nombre') {
+                $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
+            } else {
+                $('#divDoc').hide();
+            }
+
         } else {
             $('#valorCampoFiltroHC').attr('disabled', true);
         }
+
+
         $('#valorCampoFiltroHC').attr('placeholder', fBusqueda);
         $('#errorB').html("<span class='col'>No has buscado nada ah&uacute;n</span>")
         $('#errorB').show()
@@ -153,10 +162,8 @@ function vistaEscritorioMedico() {
         vBusqueda = $(this).val();
         if (vBusqueda !== '') {
             if ($('#slcCampoFiltroHC').val() === 'documento') {
-                $('#divDoc').hide();
                 rellenarTablaHCB(Number(vBusqueda));
             } else if ($('#slcCampoFiltroHC').val() === 'nombre') {
-                $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
                 rellenarTablaHCB(vBusqueda);
             }
         }
@@ -274,7 +281,7 @@ function rellenarTablaHCBD() {
         $('#tbPTD tr td').click(e => {
             e.preventDefault();
             var docum;
-            
+
 
             if ((e.target.outerText.length === 8 || e.target.outerText.length === 7) && !isNaN(e.target.outerText)) {
                 docum = Number(e.target.outerText);
@@ -282,6 +289,8 @@ function rellenarTablaHCBD() {
             } else {
                 docum = e.target.outerText;
                 $('#slcCampoFiltroHC').val("nombre");                
+                $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
+                $('#txtDoc').show();
             }
             $('#valorCampoFiltroHC').val(docum);
             rellenarTablaHCB(docum);
@@ -514,18 +523,21 @@ function cambiarMedico() {
 
 function agregarHC() {
     let doc;
-    var val;
-    if ($('#slcCampoFiltroHC').val() === 'nombre') {
-        doc = Number($('#txtDoc').val());
-
-    } else {
-        doc = Number($('#valorCampoFiltroHC').val());
-    }
+    let val;
     let motivo = $('#txtMotivo').val();;
     let diagnostico = $('#txtDiagnostico').val();
     let prescripcion = $('#txtPrescripcion').val();
     let img = $('#fileImagen').val();
 
+    if ($('#slcCampoFiltroHC').val() === 'nombre') {
+        doc = $('#txtDoc').val();
+        console.log(doc);
+        
+    } else {
+        doc = Number($('#valorCampoFiltroHC').val());
+    }
+    
+    
     if (motivo !== "" && diagnostico !== "" && prescripcion !== "") {
         if (img !== "") {
             if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
