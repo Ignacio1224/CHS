@@ -157,7 +157,8 @@ function vistaEscritorioMedico() {
     });
 
     // Handler de boton buscar
-    $('#btnBuscar').click(function() {
+    $('#btnBuscar').click(function(e) {
+        e.preventDefault();
         var vBusqueda = $('#valorCampoFiltroHC').val();
         if (vBusqueda !== '') {
             if ($('#slcCampoFiltroHC').val() === 'documento') {
