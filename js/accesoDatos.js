@@ -12,77 +12,77 @@ var accesoDatos = (function () {
     /** JUEGO DE DATOS */
     var medicos = [{
             numero: 123456,
-            nombre: 'Matias Schmid',
-            especialidad: 'Medicina General',
-            clave: 'MSPass32'
+            nombre: "Matias Schmid",
+            especialidad: "Medicina General",
+            clave: "MSPass32"
         },
         {
             numero: 234567,
-            nombre: 'Ignacio Cabrera',
-            especialidad: 'Medicina General',
-            clave: 'ICPass32'
+            nombre: "Ignacio Cabrera",
+            especialidad: "Medicina General",
+            clave: "ICPass32"
         },
         {
             numero: 891011,
-            nombre: 'Marcelo Medina',
-            especialidad: 'Cardiología',
-            clave: 'MMPass32'
+            nombre: "Marcelo Medina",
+            especialidad: "Cardiología",
+            clave: "MMPass32"
         }
     ];
 
     var pacientes = [{
             documento: 49274397,
-            nombre: 'Mariano Ramos',
+            nombre: "Mariano Ramos",
             medicocabecera: 123456,
-            clave: 'MR1234'
+            clave: "MR1234"
         },
         {
             documento: 51619074,
-            nombre: 'Susana Garrido',
+            nombre: "Susana Garrido",
             medicocabecera: 234567,
-            clave: 'SG1234'
+            clave: "SG1234"
         }
     ];
 
     var historias = [{
-            "historia": 1,
-            "documento": 49274397,
-            "numero": 123456,
-            "fecha": "2018 - 02 - 20", // YYYY - MM - DD
-            "motivo": "Texto del motivo de la consulta…",
-            "diagnostico": "Texto del diagnóstico del médico….",
-            "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/placa2.jpg"
+            historia: 1,
+            documento: 49274397,
+            numero: 123456,
+            fecha: "2018-02-20", // YYYY-MM-DD
+            motivo: "Texto del motivo de la consulta…",
+            diagnostico: "Texto del diagnóstico del médico….",
+            prescripcion: "Texto de la prescripción del médico...",
+            imagen: "../images/placa2.jpg"
         },
         {
-            "historia": 2,
-            "documento": 49274397,
-            "numero": 234567,
-            "fecha": "2018 - 08 - 03", // YYYY - MM - DD
-            "motivo": "Texto del motivo de la consulta…",
-            "diagnostico": "Texto del diagnóstico del médico….",
-            "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/placa1.jpg"
+            historia: 2,
+            documento: 49274397,
+            numero: 234567,
+            fecha: "2018-06-03", // YYYY-MM-DD
+            motivo: "Texto del motivo de la consulta…",
+            diagnostico: "Texto del diagnóstico del médico….",
+            prescripcion: "Texto de la prescripción del médico...",
+            imagen: "../images/placa1.jpg"
         },
         {
-            "historia": 1,
-            "documento": 51619074,
-            "numero": 123456,
-            "fecha": "2018 - 09 - 07", // YYYY - MM - DD
-            "motivo": "Texto del motivo de la consulta…",
-            "diagnostico": "Texto del diagnóstico del médico….",
-            "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/placa1.jpg"
+            historia: 1,
+            documento: 51619074,
+            numero: 123456,
+            fecha: "2018-09-07", // YYYY-MM-DD
+            motivo: "Texto del motivo de la consulta…",
+            diagnostico: "Texto del diagnóstico del médico….",
+            prescripcion: "Texto de la prescripción del médico...",
+            imagen: "../images/placa1.jpg"
         },
         {
-            "historia": 2,
-            "documento": 51619074,
-            "numero": 234567,
-            "fecha": "2018 - 01 - 24", // YYYY - MM - DD
-            "motivo": "Texto del motivo de la consulta…",
-            "diagnostico": "Texto del diagnóstico del médico….",
-            "prescripcion": "Texto de la prescripción del médico...",
-            "imagen": "../images/placa2.jpg"
+            historia: 2,
+            documento: 51619074,
+            numero: 234567,
+            fecha: "2018-01-24", // YYYY-MM-DD
+            motivo: "Texto del motivo de la consulta…",
+            diagnostico: "Texto del diagnóstico del médico….",
+            prescripcion: "Texto de la prescripción del médico...",
+            imagen: "../images/placa2.jpg"
         }
     ];
 
@@ -218,7 +218,10 @@ var accesoDatos = (function () {
     // Agrega una historia del paciente
     var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
         let _date = new Date();
-        let _fecha = _date.getFullYear() + " - " + (_date.getMonth() + 1) + " - " + _date.getDate();
+        //let _fecha = _date.getFullYear() + " - " + (_date.getMonth() + 1) + " - " + _date.getDate();
+        
+        let _fecha = _date.getFullYear() + '-' + ('0' + (_date.getMonth()+1)).slice(-2) + '-' + ('0' + _date.getDate()).slice(-2);
+        
         let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
         try {
             historias.push({
@@ -239,7 +242,7 @@ var accesoDatos = (function () {
 
     // Obtiene la lista de pacientes tratados por un medico
     var obtenerPacientesTratados = function (_numero) {
-        if (!isNaN(_numero)) {
+        if (_numero !== '' && !isNaN(_numero)) {
             var consultas = historias.filter(consulta => consulta.numero === _numero);
             var pacientesTratados = [];
             consultas.forEach(c => {
@@ -256,8 +259,19 @@ var accesoDatos = (function () {
         }
     };
 
+    // Obtiene un array con el/los paciente/s cuyo médico de cabecera es el que se especifica
+    var obtenerPacientesDeMedico = function(_numero) {
+        if (_numero !== '' && !isNaN(_numero)) {
+            let pacientesDeMedico = pacientes.filter(p => p.medicocabecera === _numero);
+            return pacientesDeMedico;
+        } else {
+            return [];
+        }
+    };
+
     // Interfaz pública
     return {
+        AgregarHistoria: agregarHistoria,
         EstablecerUsuarioLogueado: establecerUsuarioLogueado,
         ObtenerUsuarioLogueado: obtenerUsuarioLogueado,
         ObtenerUsuario: obtenerUsuario,
@@ -269,8 +283,6 @@ var accesoDatos = (function () {
         ObtenerNombrePaciente: obtenerNombrePaciente,
         ObtenerDocumentos: obtenerDocumentos,
         ObtenerHistoria: obtenerHistoria,
-        AgregarHistoria: agregarHistoria,
         ObtenerPacientesTratados: obtenerPacientesTratados
     }
-
 })();
