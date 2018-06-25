@@ -10,7 +10,8 @@ var accesoDatos = (function () {
     var usuarioLogueado = null;
 
     /** JUEGO DE DATOS */
-    var medicos = [{
+    var medicos = [
+        {
             numero: 123456,
             nombre: "Matias Schmid",
             especialidad: "Medicina General",
@@ -27,10 +28,47 @@ var accesoDatos = (function () {
             nombre: "Marcelo Medina",
             especialidad: "Cardiología",
             clave: "MMPass32"
-        }
+        },
+        {
+            numero: 654321,
+            nombre: "Elisa Alvez",
+            especialidad: "Medicina General",
+            clave: "aaaaa"
+          },
+          {
+            numero: 111111,
+            nombre: "Laura Tiscornia",
+            especialidad: "Medicina General",
+            clave: "eer32"
+          },
+          {
+            numero: 664422,
+            nombre: "Jose Maria Perez",
+            especialidad: "Oftalmología",
+            clave: "aaabb"
+          },
+          {
+            numero: 245124,
+            nombre: "Jorge Perez",
+            especialidad: "Pediatría",
+            clave: "jpere"
+          },
+          {
+            numero: 224455,
+            nombre: "Juan Pedro Perez",
+            especialidad: "Pediatría",
+            clave: "qqqqq"
+          },
+          {
+            numero: 887548,
+            nombre: "Maria Gutierrez",
+            especialidad: "Neurología",
+            clave: "qqqqq"
+          }
     ];
 
-    var pacientes = [{
+    var pacientes = [
+        {
             documento: 49274397,
             nombre: "Mariano Ramos",
             medicocabecera: 123456,
@@ -41,6 +79,42 @@ var accesoDatos = (function () {
             nombre: "Susana Garrido",
             medicocabecera: 234567,
             clave: "SG1234"
+        },
+        {
+            documento: 2354875,
+            nombre: "Ana Gonzalez",
+            medicocabecera: 123456,
+            clave: "b23va"
+        },
+        {
+            documento: 6542157,
+            nombre: "Jorge Perez",
+            medicocabecera: 111111,
+            clave: "123ab"
+        },
+        {
+            documento: 3587458,
+            nombre: "Luis Rodriguez",
+            medicocabecera: 123456,
+            clave: "aaaaa"
+        },
+        {
+            documento: 3254125,
+            nombre: "Pedro Rodriguez",
+            medicocabecera: 654321,
+            clave: "Aa111"
+        },
+        {
+            documento: 2653214,
+            nombre: "Cecilia Demaria",
+            medicocabecera: 111111,
+            clave: "bbb22"
+        },
+        {
+            documento: 3625487,
+            nombre: "Elena Jimenez",
+            medicocabecera: 123456,
+            clave: "elena"
         }
     ];
 
@@ -48,7 +122,7 @@ var accesoDatos = (function () {
             historia: 1,
             documento: 49274397,
             numero: 123456,
-            fecha: "2018-02-20", // YYYY-MM-DD
+            fecha: new Date(2018, 1, 20), //fecha: "2018-02-20", // YYYY-MM-DD
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -58,7 +132,7 @@ var accesoDatos = (function () {
             historia: 2,
             documento: 49274397,
             numero: 234567,
-            fecha: "2018-06-03", // YYYY-MM-DD
+            fecha: new Date(2018, 5, 03), //"2018-06-03", // YYYY-MM-DD
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -68,7 +142,7 @@ var accesoDatos = (function () {
             historia: 1,
             documento: 51619074,
             numero: 123456,
-            fecha: "2018-09-07", // YYYY-MM-DD
+            fecha: new Date(2018, 8, 07), //"2018-09-07", // YYYY-MM-DD
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -78,13 +152,35 @@ var accesoDatos = (function () {
             historia: 2,
             documento: 51619074,
             numero: 234567,
-            fecha: "2018-01-24", // YYYY-MM-DD
+            fecha: new Date(2018, 0, 24), //"2018-01-24", // YYYY-MM-DD
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
             imagen: "../images/placa2.jpg"
         }
     ];
+
+    // Formatea una fecha y retorna su representación textual como DD/MM/YYYY
+    var formatearFecha = function(fechaString) {
+        if (fechaString !== null) {
+            var fecha = new Date(fechaString);
+            var fechaFormateada = '';
+            var dd = fecha.getDate();
+            var mm = fecha.getMonth() + 1;
+            var yyyy = fecha.getFullYear();
+            
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+
+            fechaFormateada = dd + '/' + mm + '/' + yyyy;
+            return fechaFormateada;
+        }
+    };
 
     // Recibe un objeto representando a un usuario y retorna el usuario correspondiente en base a su campo clave siempre que exista
     var obtenerUsuario = function (usuario) {
@@ -178,8 +274,8 @@ var accesoDatos = (function () {
 
     // Obtiene una historia de paciente de la lista a partir de su documento de identidad
     var obtenerHistoria = function (_documento) {
-        let hist = [];
-        let diag, pres, im, mot;
+        var hist = [];
+        var diag, pres, im, mot;
         for (let i = 0, l = historias.length; i < l; i++) {
             if (historias[i].documento === _documento) {
                 if (historias[i].diagnostico === ""){
@@ -204,7 +300,7 @@ var accesoDatos = (function () {
                     "historia": historias[i].historia,
                     "documento": historias[i].documento,
                     "numero": historias[i].numero,
-                    "fecha": historias[i].fecha,
+                    "fechaAtencion": formatearFecha(historias[i].fecha),
                     "motivo": mot,
                     "diagnostico": diag,
                     "prescripcion": pres,
@@ -217,18 +313,14 @@ var accesoDatos = (function () {
 
     // Agrega una historia del paciente
     var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
-        let _date = new Date();
-        //let _fecha = _date.getFullYear() + " - " + (_date.getMonth() + 1) + " - " + _date.getDate();
-        
-        let _fecha = _date.getFullYear() + '-' + ('0' + (_date.getMonth()+1)).slice(-2) + '-' + ('0' + _date.getDate()).slice(-2);
-        
+        let _date = new Date();        
         let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
         try {
             historias.push({
                 'historia': _historia,
                 'documento': _documento,
                 'numero': _numero,
-                'fecha': _fecha,
+                'fecha': _date,
                 'motivo': _motivo,
                 'diagnostico': _diagnostico,
                 'prescripcion': _prescripcion,
@@ -244,10 +336,11 @@ var accesoDatos = (function () {
     var obtenerPacientesTratados = function (_numero) {
         if (_numero !== '' && !isNaN(_numero)) {
             var consultas = historias.filter(consulta => consulta.numero === _numero);
+            consultas.sort((a,b) => a.fecha > b.fecha ? -1 : 1);
             var pacientesTratados = [];
             consultas.forEach(c => {
                 pacientesTratados.push({
-                    fechaAtencion: c.fecha,
+                    fechaAtencion: formatearFecha(c.fecha),
                     nombre: pacientes.filter(p => p.documento === c.documento)[0].nombre,
                     motivoConsulta: c.motivo,
                     documento: c.documento

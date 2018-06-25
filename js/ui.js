@@ -4,9 +4,14 @@ $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
 $('#btnCambiarMedico').click(cambiarMedico);
 $('#btnAgregarHC').click(agregarHC);
+$('#btnCancelarAgregarHC').click(function() {
+    $('#divErrorAgregarHC').hide();
+});
 $("#datepicker").datepicker({
     maxDate: 0,
-    dateFormat: 'dd-mm-yy'
+    dateFormat: "dd/mm/yy",
+    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"]
 });
 
 /**
@@ -189,10 +194,11 @@ function rellenarTablaHCB(valor) {
                 let his = accesoDatos.ObtenerHistoria(valor);
                 if (his.length > 0) {
                     for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
-                        fechan = his[j].fecha.split("-");
+                        fechan = his[j].fechaAtencion;
                         $('#tablaHCF').append(`<tr id='k${j}'></tr>`);
                         //$(`#k${j}`).append("<td>" + accesoDatos.ObtenerNombrePaciente(his[j].documento) + "</td>")
-                        $(`#k${j}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
+                        //$(`#k${j}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
+                        $(`#k${j}`).append("<td>" + fechan + "</td>");
                         $(`#k${j}`).append("<td>" + his[j].motivo + "</td>");
                         $(`#k${j}`).append("<td>" + his[j].diagnostico + "</td>");
                         $(`#k${j}`).append("<td>" + his[j].prescripcion + "</td>");
@@ -229,9 +235,9 @@ function rellenarTablaHCB(valor) {
                     for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
                         $('#tablaHCF').append(`<tr id='l${i}${j}'></tr>`);
 
-                        fechan = his[j].fecha.split("-");
+                        fechan = his[j].fecha;
                         //$(`#l${i}${j}`).append("<td>" + his[j].documento + "</td>")
-                        $(`#l${i}${j}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
+                        $(`#l${i}${j}`).append("<td>" + fechan + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].motivo + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].diagnostico + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].prescripcion + "</td>");
@@ -267,35 +273,44 @@ function rellenarTablaHCB(valor) {
 function rellenarTablaHCBD() {
     if ($(this).val() !== '') {
         $('#tbPTD').html('');
-        let fecha = $(this).val().split('-');
+        let fecha = $(this).val();
         let pacientes = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
-        for (var i = 0, lp = pacientes.length; i < lp; i++) {
-            //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + " - " + fecha[1] + ' - ' + fecha[0])) {
-                if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + "-" + fecha[1] + "-" + fecha[0])) {
-                $('#tbPTD').append(`<tr id="${i}"></tr>`);
-                $(`#${i}`).append(`<td>${pacientes[i].documento}</td>`);
-                $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`);
+        if (pacientes.length > 0) {
+            for (let i = 0, lp = pacientes.length; i < lp; i++) {
+                //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + " - " + fecha[1] + ' - ' + fecha[0])) {
+                //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + "-" + fecha[1] + "-" + fecha[0])) {
+                var historiasDePaciente = accesoDatos.ObtenerHistoria(pacientes[i].documento);
+                if (historiasDePaciente[i].fechaAtencion === fecha) {    
+                    //var tr = $(`<tr id='${i}'></tr>`);
+                    //tr.append(`<td>${pacientes[i].documento}</td>`);
+                    //tr.append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`);
+                    //$('#tbPTD').append(tr);
+                    
+                    $('#tbPTD').append(`<tr id='${i}'></tr>`);
+                    $(`#${i}`).append(`<td>${pacientes[i].documento}</td>`);
+                    $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`);
+                }
             }
+    
+            $('#tbPTD tr').click((e) => {
+                e.preventDefault();
+                var docum;
+    
+                if ((e.target.innerText.length === 8 || e.target.innerText.length === 7) && !isNaN(e.target.innerText)) {
+                    docum = Number(e.target.innerText);
+                    $('#slcCampoFiltroHC').val("documento");
+                } else {
+                    docum = e.target.innerText;
+                    $('#slcCampoFiltroHC').val("nombre"); 
+                    //$('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
+                    //$('#txtDoc').show();
+                }
+                $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
+                $('#valorCampoFiltroHC').val(docum);
+                rellenarTablaHCB(docum);
+                $('.nav-tabs a[href="#nav-clinic-search"]').tab('show');
+            });
         }
-
-        $('#tbPTD tr').click((e) => {
-            e.preventDefault();
-            var docum;
-
-            if ((e.target.innerText.length === 8 || e.target.innerText.length === 7) && !isNaN(e.target.innerText)) {
-                docum = Number(e.target.innerText);
-                $('#slcCampoFiltroHC').val("documento");
-            } else {
-                docum = e.target.innerText;
-                $('#slcCampoFiltroHC').val("nombre"); 
-                //$('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
-                //$('#txtDoc').show();
-            }
-            $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
-            $('#valorCampoFiltroHC').val(docum);
-            rellenarTablaHCB(docum);
-            $('.nav-tabs a[href="#nav-clinic-search"]').tab('show');
-        });
     } 
 }
 
@@ -535,17 +550,13 @@ function agregarHC() {
         doc = Number($('#valorCampoFiltroHC').val());
     }
     
-    if (motivo !== "" && diagnostico !== "" && prescripcion !== "") {
-        if (img !== "") {
-            if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
-                $('#divErrorAgregarHC').hide();
-                img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
-            } else {
-                $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
-                $('#divErrorAgregarHC').show();
-            }
+    if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && img !== "") {
+        if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
+            $('#divErrorAgregarHC').hide();
+            img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
         } else {
-            img = "";
+            $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
+            $('#divErrorAgregarHC').show();
         }
         var validation = accesoDatos.AgregarHistoria(doc, accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
         val = true;
@@ -561,6 +572,7 @@ function agregarHC() {
         $('#txtPrescripcion').val("");
         $('#fileImagen').val("");
         $('#btnAgregarHC').attr('data-dismiss', "modal");
+        $('#divErrorAgregarHC').hide();
         $('#modalSuccessHC').fadeTo(2000, 500).slideUp(500, function () {
             $('#modalSuccessHC').slideUp(500);
         });
