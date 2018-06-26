@@ -6,7 +6,6 @@
 
 var utilidades = {
     resetearCampo : function(campo) {
-        console.log('entro');
         campo.val('');
         campo.focus();
     },

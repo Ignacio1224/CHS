@@ -4,9 +4,22 @@ $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
 $('#btnCambiarMedico').click(cambiarMedico);
 $('#btnAgregarHC').click(agregarHC);
+$('#valorCampoFiltroHC').keyup(function() {
+    if($(this).val() === '') {
+        $('#btnNuevaActuacion').attr('disabled', true);
+    } else {
+        if (validarCI($(this).val())) {
+            $('#btnNuevaActuacion').attr('disabled', false);
+        } else {
+            $('#btnNuevaActuacion').attr('disabled', true);
+        }
+    }
+});
+
 $('#btnCancelarAgregarHC').click(function () {
     $('#divErrorAgregarHC').hide();
 });
+
 $('#datepicker').datepicker({
     maxDate: 0,
     dateFormat: "dd/mm/yy",
@@ -99,12 +112,6 @@ function ingresar() {
  * Punto de entrada para la vista del escritorio del perfil médico.
  */
 function vistaEscritorioMedico() {
-
-    $('#doctor-tab a').click(function() {
-        console.log($(this).attr('aria-controls'));
-    });
-
-
     $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
 
     $("#btnCerrarSesionM").on('click', function () {
@@ -161,7 +168,6 @@ function vistaEscritorioMedico() {
             $('#btnBuscar').attr('disabled', true);
         }
 
-
         $('#valorCampoFiltroHC').attr('placeholder', fBusqueda);
         $('#errorB').html("<span class='col'>No has buscado nada a&uacute;n</span>")
         $('#errorB').show();
@@ -184,10 +190,6 @@ function vistaEscritorioMedico() {
 
     $('#datepicker').change(rellenarTablaHCBD);
 }
-
-/**
- * Funciones controladoras de la interfaz gráfica
- */
 
 // Cargar la tabla de historias clinicas de un paciente
 function rellenarTablaHCB(valor) {
@@ -215,7 +217,7 @@ function rellenarTablaHCB(valor) {
                             $(`#k${j}`).append("<td>No hay imagen para mostrar</td>");
                         }
                     }
-                    $('#btnNuevaActuacion').attr('disabled', false);
+                    $('#btnNuevaActuacion').prop('disabled', false);
                 } else {
                     //$("#tablaHCF").html("<thead><tr><th>No hay consultas</th></thead>")
                     $("#tablaHCF").html("<tr><td colspan='6'>No hay consultas</td>")
@@ -306,7 +308,7 @@ function rellenarTablaHCBD() {
                     docum = e.target.innerText;
                     $('#slcCampoFiltroHC').val("nombre");
                     $('#divDoc').remove('#divDoc');
-                    $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
+                    $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text" class="form-control" name="txtDoc" id="txtDoc" maxlength="8" onKeyDown="if(event.keyCode==13) agregarHC();"></div>');
                 }
                 $('#txtDoc').val(accesoDatos.ObtenerDocumentos(docum)[0]);
                 $('#valorCampoFiltroHC').val(docum);
@@ -534,21 +536,25 @@ function cambiarMedico() {
 }
 
 function agregarHC() {
-    let doc;
     let val;
+    let ciValida = false;
+    let doc;
     let motivo = $('#txtMotivo').val();;
     let diagnostico = $('#txtDiagnostico').val();
     let prescripcion = $('#txtPrescripcion').val();
     let img = $('#fileImagen').val();
 
     if ($('#slcCampoFiltroHC').val() === 'nombre') {
-        doc = Number($('#txtDoc').val());
-        console.log(doc);
+        if (validarCI($('#txtDoc').val()) && $('#txtDoc').val().length > 0) {
+            doc = Number($('#txtDoc').val());
+            ciValida = true;
+        }
     } else {
         doc = Number($('#valorCampoFiltroHC').val());
+        ciValida = true;
     }
 
-    if (motivo !== "" && diagnostico !== "" && prescripcion !== "") {
+    if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && doc !== undefined) {
         if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
             $('#divErrorAgregarHC').hide();
             img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
@@ -560,9 +566,15 @@ function agregarHC() {
         val = true;
     } else {
         val = false;
-        $('#divErrorAgregarHC').html("<span>Todos los campos son obligatorios</span>");
-        $('#divErrorAgregarHC').show();
+        if (ciValida){
+            $('#divErrorAgregarHC').html("<span>Todos los campos son obligatorios</span>");
+            $('#divErrorAgregarHC').show();
+        } else {
+            $('#divErrorAgregarHC').html("<span>El formato de la cédula no es válido</span>");
+            $('#divErrorAgregarHC').show();
+        }    
     }
+
     if (validation && val) {
         $('#txtDoc').val("");
         $('#txtMotivo').val("");
