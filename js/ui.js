@@ -189,6 +189,7 @@ function rellenarTablaHCB(valor) {
     $("#tablaHCF").html("");
 
     if (typeof (valor) === 'number') {
+        $("#tablaBusquedaHistoriaClinica").html("<thead><tr><th>Fecha</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id='tablaHCF'></tbody>");
         if (validarCI(String(valor)) && String(valor).length >= 7 && String(valor).length <= 8) {
             if (accesoDatos.ObtenerNombrePaciente(valor) !== null) {
                 let his = accesoDatos.ObtenerHistoria(valor);
@@ -225,7 +226,7 @@ function rellenarTablaHCB(valor) {
         }
     } else {
         if (accesoDatos.ObtenerDocumentos(valor).length > 0) {
-            //$("#tablaHCF").html("<thead><tr><th>Documento</th><th>Fecha</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id='tablaHCF'></tbody>");
+            $("#tablaBusquedaHistoriaClinica").html("<thead><tr><th>Documento</th><th>Fecha</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id='tablaHCF'></tbody>");
 
             var cis = accesoDatos.ObtenerDocumentos(valor);
 
@@ -550,7 +551,7 @@ function agregarHC() {
         doc = Number($('#valorCampoFiltroHC').val());
     }
     
-    if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && img !== "") {
+    if (motivo !== "" && diagnostico !== "" && prescripcion !== "") {
         if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
             $('#divErrorAgregarHC').hide();
             img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
