@@ -277,8 +277,16 @@ function rellenarTablaHCBD() {
         let fecha = $(this).val();
         let pacientes = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
         if (pacientes.length > 0) {
-            for (let i = 0, lp = pacientes.length; i < lp; i++) {
-                //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + " - " + fecha[1] + ' - ' + fecha[0])) {
+            let pacientesFiltrados = pacientes.filter((p) => p.fechaAtencion === fecha);
+
+            if (pacientesFiltrados.length > 0) {
+                for (let i = 0, lp = pacientesFiltrados.length; i < lp; i++) {
+                    $('#tbPTD').append(`<tr id='${i}'></tr>`);
+                    $(`#${i}`).append(`<td>${pacientes[i].documento}</td>`);
+                    $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`);
+                }
+            }
+                /*  //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + " - " + fecha[1] + ' - ' + fecha[0])) {
                 //if (accesoDatos.ObtenerHistoria(pacientes[i].documento)[i].fecha === (fecha[2] + "-" + fecha[1] + "-" + fecha[0])) {
                 var historiasDePaciente = accesoDatos.ObtenerHistoria(pacientes[i].documento);
                 if (historiasDePaciente[i].fechaAtencion === fecha) {    
@@ -289,9 +297,7 @@ function rellenarTablaHCBD() {
                     
                     $('#tbPTD').append(`<tr id='${i}'></tr>`);
                     $(`#${i}`).append(`<td>${pacientes[i].documento}</td>`);
-                    $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`);
-                }
-            }
+                    $(`#${i}`).append(`<td>${accesoDatos.ObtenerNombrePaciente(pacientes[i].documento)}</td>`); */
     
             $('#tbPTD tr').click((e) => {
                 e.preventDefault();
