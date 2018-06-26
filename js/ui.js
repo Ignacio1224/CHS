@@ -235,7 +235,7 @@ function rellenarTablaHCB(valor) {
                     for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
                         $('#tablaHCF').append(`<tr id='l${i}${j}'></tr>`);
 
-                        fechan = his[j].fecha;
+                        fechan = his[j].fechaAtencion;
                         //$(`#l${i}${j}`).append("<td>" + his[j].documento + "</td>")
                         $(`#l${i}${j}`).append("<td>" + fechan + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].motivo + "</td>");

@@ -122,7 +122,7 @@ var accesoDatos = (function () {
             historia: 1,
             documento: 49274397,
             numero: 123456,
-            fecha: new Date(2018, 1, 20), //fecha: "2018-02-20", // YYYY-MM-DD
+            fecha: new Date("2018/02/20"),
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -132,7 +132,7 @@ var accesoDatos = (function () {
             historia: 2,
             documento: 49274397,
             numero: 234567,
-            fecha: new Date(2018, 5, 03), //"2018-06-03", // YYYY-MM-DD
+            fecha: new Date("2018/06/03"),
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -142,7 +142,7 @@ var accesoDatos = (function () {
             historia: 1,
             documento: 51619074,
             numero: 123456,
-            fecha: new Date(2018, 8, 07), //"2018-09-07", // YYYY-MM-DD
+            fecha: new Date("2018/09/07"),
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -152,7 +152,7 @@ var accesoDatos = (function () {
             historia: 2,
             documento: 51619074,
             numero: 234567,
-            fecha: new Date(2018, 0, 24), //"2018-01-24", // YYYY-MM-DD
+            fecha: new Date("2018/01/24"),
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -161,9 +161,9 @@ var accesoDatos = (function () {
     ];
 
     // Formatea una fecha y retorna su representación textual como DD/MM/YYYY
-    var formatearFecha = function(fechaString) {
-        if (fechaString !== null) {
-            var fecha = new Date(fechaString);
+    var formatearFecha = function(fecha) {
+        if (fecha !== null) {
+            /*var fecha = new Date(fechaString);
             var fechaFormateada = '';
             var dd = fecha.getDate();
             var mm = fecha.getMonth() + 1;
@@ -177,8 +177,10 @@ var accesoDatos = (function () {
                 mm = '0' + mm;
             }
 
-            fechaFormateada = dd + '/' + mm + '/' + yyyy;
-            return fechaFormateada;
+            fechaFormateada = dd + '/' + mm + '/' + yyyy;*/
+
+            //return fechaFormateada;
+            return fecha.toLocaleDateString();
         }
     };
 
