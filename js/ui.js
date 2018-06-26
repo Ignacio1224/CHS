@@ -494,11 +494,7 @@ function cambiarClave() {
             $('#modalCambiarClave').modal('hide');
             $('input[name=txtClave]').val("");
             $('input[name=txtClaveVerificada]').val("");
-
-            $('#modalSuccessTitulo').html('Contraseña cambiada correctamente');
-            $("#modalSuccess").fadeTo(2000, 500).slideUp(500, function () {
-                $("#modalSuccess").slideUp(500);
-            });
+            alertOk('Contraseña cambiada correctamente');
         }
     } else {
         $('#divErrorCambiarClave').html('<span>Los campos son obligatorios</span>');
@@ -530,6 +526,7 @@ function cambiarMedico() {
     $('#ddiAM').html(accesoDatos.ObtenerNombreMedico(accesoDatos.ObtenerUsuarioLogueado().medicocabecera));
     $('#modalCambiarMedico').modal('hide');
     $('#modalCambiarMedico').on('hidden.bs.modal', cargarCmbMedico());
+    alertOk('Médico cambiado correctamente');
 }
 
 function agregarHC() {
@@ -593,12 +590,16 @@ function agregarHC() {
         $('#txtPrescripcion').val("");
         $('#fileImagen').val("");
         $('#divErrorAgregarHC').hide();
-        $('#modalSuccessTitulo').html('Consulta agregada correctamente');
-        $('#modalSuccess').fadeTo(2000, 500).slideUp(500, function () {
-            $('#modalSuccess').slideUp(500);
-        });
         rellenarTablaHCB(doc);
         $('#modalAgregarHC').modal('hide');
+        alertOk('Consulta agregada correctamente');
     }
 
+}
+
+function alertOk(msj) {
+    $('#modalSuccessTitulo').html(msj);
+    $('#modalSuccess').fadeTo(2000, 500).slideUp(500, function () {
+        $('#modalSuccess').slideUp(500);
+    });
 }
