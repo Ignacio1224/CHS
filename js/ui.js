@@ -236,7 +236,7 @@ function rellenarTablaHCB(valor) {
                         $('#tablaHCF').append(`<tr id='l${i}${j}'></tr>`);
 
                         fechan = his[j].fechaAtencion;
-                        //$(`#l${i}${j}`).append("<td>" + his[j].documento + "</td>")
+                        $(`#l${i}${j}`).append("<td>" + his[j].documento + "</td>")
                         $(`#l${i}${j}`).append("<td>" + fechan + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].motivo + "</td>");
                         $(`#l${i}${j}`).append("<td>" + his[j].diagnostico + "</td>");
