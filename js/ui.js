@@ -499,6 +499,7 @@ function cambiarClave() {
             $('input[name=txtClave]').val("");
             $('input[name=txtClaveVerificada]').val("");
 
+            $('#modalSuccessTitulo').html('Contraseña cambiada correctamente');
             $("#modalSuccess").fadeTo(2000, 500).slideUp(500, function () {
                 $("#modalSuccess").slideUp(500);
             });
@@ -583,8 +584,9 @@ function agregarHC() {
         $('#fileImagen').val("");
         $('#btnAgregarHC').attr('data-dismiss', "modal");
         $('#divErrorAgregarHC').hide();
-        $('#modalSuccessHC').fadeTo(2000, 500).slideUp(500, function () {
-            $('#modalSuccessHC').slideUp(500);
+        $('#modalSuccessTitulo').html('Consulta agregada correctamente');
+        $('#modalSuccess').fadeTo(2000, 500).slideUp(500, function () {
+            $('#modalSuccess').slideUp(500);
         });
         rellenarTablaHCB(doc);
     }
