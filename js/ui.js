@@ -7,7 +7,7 @@ $('#btnAgregarHC').click(agregarHC);
 $('#btnCancelarAgregarHC').click(function () {
     $('#divErrorAgregarHC').hide();
 });
-$("#datepicker").datepicker({
+$('#datepicker').datepicker({
     maxDate: 0,
     dateFormat: "dd/mm/yy",
     monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
@@ -99,6 +99,12 @@ function ingresar() {
  * Punto de entrada para la vista del escritorio del perfil médico.
  */
 function vistaEscritorioMedico() {
+
+    $('#doctor-tab a').click(function() {
+        console.log($(this).attr('aria-controls'));
+    });
+
+
     $('#navbarDropdownMedico').html(accesoDatos.ObtenerUsuarioLogueado().nombre);
 
     $("#btnCerrarSesionM").on('click', function () {
@@ -377,11 +383,9 @@ function vistaEscritorioSocio() {
     $('#tablaMedicosConsultados').html('');
     if (st.length > 0) {
         $('#tH').html('<thead><tr><th style="width: 12%">Fecha</th><th>M&eacute;dico</th><th>Motivo</th><th>Diagn&oacute;stico</th><th>Prescripci&oacute;n</th><th>Imagen</th></tr></thead><tbody id="tablaHistorias"></tbody>');
-        let fechan;
         for (let j = st[st.length - 1].historia - 1; j > -1; j--) {
-            fechan = st[j].fecha.split("-");
             $('#tablaHistorias').append(`<tr id='t${j}'></tr>`);
-            $(`#t${j}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
+            $(`#t${j}`).append("<td>" + st[j].fechaAtencion + "</td>");
             $(`#t${j}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[j].numero) + "</td>");
             $(`#t${j}`).append("<td>" + st[j].motivo + "</td>");
             $(`#t${j}`).append("<td>" + st[j].diagnostico + "</td>");
@@ -404,9 +408,8 @@ function vistaEscritorioSocio() {
         });
         $('#tMC').html('<thead><tr><th style="width: 24%">Fecha de consulta</th><th>M&eacute;dico</th><th>Especialidad</th></tr></thead><tbody id="tablaMedicosConsultados"></tbody>');
         for (let h = st[st.length - 1].historia - 1; h > -1; h--) {
-            fechan = st[h].fecha.split("-");
             $('#tablaMedicosConsultados').append(`<tr id='h${h}'></tr>`);
-            $(`#h${h}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
+            $(`#h${h}`).append("<td>" + st[h].fechaAtencion + "</td>");
             $(`#h${h}`).append("<td>" + accesoDatos.ObtenerNombreMedico(st[h].numero) + "</td>");
             $(`#h${h}`).append("<td>" + accesoDatos.ObtenerEspecialidad(st[h].numero) + "</td>");
         }
@@ -419,10 +422,8 @@ function vistaEscritorioSocio() {
                 j = im;
                 $('#gallery').append(`<div class="card-deck" id="${j}">`);
             }
-
-            fechan = st[k].fecha.split("-");
             if (st[k].imagen !== '') {
-                $(`#${j}`).append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${fechan[2] + '/' + fechan[1] + '/' + fechan[0]}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
+                $(`#${j}`).append(`<div class="card"><img src='${st[k].imagen}'><div class="card-body"><h5 class="card-title">Fecha: ${st[k].fechaAtencion}</h5><p class="card-text">Diagn&oacute;stico: ${st[k].diagnostico}</p></div>`);
             }
 
             im++;
