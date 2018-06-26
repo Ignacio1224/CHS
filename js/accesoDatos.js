@@ -163,7 +163,7 @@ var accesoDatos = (function () {
     // Formatea una fecha y retorna su representación textual como DD/MM/YYYY
     var formatearFecha = function(fecha) {
         if (fecha !== null) {
-            /*var fecha = new Date(fechaString);
+            //var fecha = new Date(_fecha);
             var fechaFormateada = '';
             var dd = fecha.getDate();
             var mm = fecha.getMonth() + 1;
@@ -177,10 +177,10 @@ var accesoDatos = (function () {
                 mm = '0' + mm;
             }
 
-            fechaFormateada = dd + '/' + mm + '/' + yyyy;*/
+            fechaFormateada = dd + '/' + mm + '/' + yyyy;
 
-            //return fechaFormateada;
-            return fecha.toLocaleDateString();
+            return fechaFormateada;
+            //return fecha.toLocaleDateString();
         }
     };
 
