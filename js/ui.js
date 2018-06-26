@@ -548,20 +548,31 @@ function agregarHC() {
     if ($('#slcCampoFiltroHC').val() === 'nombre') {
         if (validarCI($('#txtDoc').val()) && $('#txtDoc').val().length > 0) {
             doc = Number($('#txtDoc').val());
-            ciValida = true;
+            if (accesoDatos.ObtenerNombrePaciente(doc) !== null) {
+                ciValida = true;
+            } else {
+                doc = undefined;
+            }
         }
     } else {
         doc = Number($('#valorCampoFiltroHC').val());
-        ciValida = true;
+        if (accesoDatos.ObtenerNombrePaciente(doc) !== null) {
+            ciValida = true;
+        } else {
+            doc = undefined;
+        }
+        
     }
 
     if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && doc !== undefined) {
-        if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
-            $('#divErrorAgregarHC').hide();
-            img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
-        } else {
-            $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
-            $('#divErrorAgregarHC').show();
+        if (img.length > 0) {
+            if (img.substr(img.length - 4, img.length - 1) === ".jpg" || img.substr(img.length - 4, img.length - 1) === ".png") {
+                $('#divErrorAgregarHC').hide();
+                img = "../images/" + img.substr(img.lastIndexOf('\\') + 1);
+            } else {
+                $('#divErrorAgregarHC').html("<span>No has ingresado una imagen</span>");
+                $('#divErrorAgregarHC').show();
+            }
         }
         var validation = accesoDatos.AgregarHistoria(doc, accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
         val = true;
@@ -571,9 +582,9 @@ function agregarHC() {
             $('#divErrorAgregarHC').html("<span>Todos los campos son obligatorios</span>");
             $('#divErrorAgregarHC').show();
         } else {
-            $('#divErrorAgregarHC').html("<span>El formato de la cédula no es válido</span>");
+            $('#divErrorAgregarHC').html("<span>La cédula no es válida</span>");
             $('#divErrorAgregarHC').show();
-        }    
+        }
     }
 
     if (validation && val) {
