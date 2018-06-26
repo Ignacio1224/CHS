@@ -1,4 +1,10 @@
 /**
+ * Creado por:
+ * Ignacio Cabrera
+ * Matias Schmid
+ */
+
+/**
  * accesoDatos.js - módulo de acceso a datos basado en el patrón de 'Módulo Revelado' - 'Reveal Module Pattern'
  * -------------------------------
  */

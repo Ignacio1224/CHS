@@ -1,4 +1,10 @@
 /**
+ * Creado por:
+ * Ignacio Cabrera
+ * Matias Schmid
+ */
+
+/**
  * utilidades.js
  * ---------------------------------
  * Archivo de metodos utilitarios

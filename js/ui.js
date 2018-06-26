@@ -1,4 +1,10 @@
-// Eventos
+/**
+ * Creado por:
+ * Ignacio Cabrera
+ * Matias Schmid
+ */ 
+
+ // Eventos
 $(document).ready(mostrarCuadroLogin);
 $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
