@@ -7,7 +7,7 @@ $('#btnAgregarHC').click(agregarHC);
 $('#valorCampoFiltroHC').keyup(function() {
     if($(this).val() === '') {
         $('#btnNuevaActuacion').attr('disabled', true);
-    } else {
+    } else if ($('#valorCampoFiltroHC') === 'documento') {
         if (validarCI($(this).val())) {
             $('#btnNuevaActuacion').attr('disabled', false);
         } else {
