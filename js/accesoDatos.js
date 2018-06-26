@@ -163,7 +163,6 @@ var accesoDatos = (function () {
     // Formatea una fecha y retorna su representación textual como DD/MM/YYYY
     var formatearFecha = function(fecha) {
         if (fecha !== null) {
-            //var fecha = new Date(_fecha);
             var fechaFormateada = '';
             var dd = fecha.getDate();
             var mm = fecha.getMonth() + 1;
@@ -180,7 +179,6 @@ var accesoDatos = (function () {
             fechaFormateada = dd + '/' + mm + '/' + yyyy;
 
             return fechaFormateada;
-            //return fecha.toLocaleDateString();
         }
     };
 
@@ -316,8 +314,9 @@ var accesoDatos = (function () {
     // Agrega una historia del paciente
     var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
         let _date = new Date();        
-        let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
+        
         try {
+            let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
             historias.push({
                 'historia': _historia,
                 'documento': _documento,
@@ -349,16 +348,6 @@ var accesoDatos = (function () {
                 });
             });
             return pacientesTratados;
-        } else {
-            return [];
-        }
-    };
-
-    // Obtiene un array con el/los paciente/s cuyo médico de cabecera es el que se especifica
-    var obtenerPacientesDeMedico = function(_numero) {
-        if (_numero !== '' && !isNaN(_numero)) {
-            let pacientesDeMedico = pacientes.filter(p => p.medicocabecera === _numero);
-            return pacientesDeMedico;
         } else {
             return [];
         }

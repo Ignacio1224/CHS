@@ -4,8 +4,8 @@ $('#btnIngresar').click(ingresar);
 $('#btnCambiarClave').click(cambiarClave);
 $('#btnCambiarMedico').click(cambiarMedico);
 $('#btnAgregarHC').click(agregarHC);
-$('#valorCampoFiltroHC').keyup(function() {
-    if($(this).val() === '') {
+$('#valorCampoFiltroHC').keyup(function () {
+    if ($(this).val() === '') {
         $('#btnNuevaActuacion').attr('disabled', true);
     } else if ($('#valorCampoFiltroHC') === 'documento') {
         if (validarCI($(this).val())) {
@@ -152,13 +152,13 @@ function vistaEscritorioMedico() {
     $('#slcCampoFiltroHC').change(function () {
         utilidades.resetearCampo($('#valorCampoFiltroHC'));
 
-        //$('#valorCampoFiltroHC').val("");
         var fBusqueda = $(this).val();
         $("#tablaHCF").empty();
         if (fBusqueda !== '') {
             $('#valorCampoFiltroHC').attr('disabled', false);
             $('#btnBuscar').attr('disabled', false);
             if ($('#slcCampoFiltroHC').val() === 'nombre') {
+                $('#divDoc').remove('#divDoc');
                 $('#modal-AHCn').prepend('<div class="form-group" id="divDoc"><label for="txtDoc">Documento</label><input type="text-area" class="form-control" name="txtDoc" id="txtDoc" onKeyDown = "if(event.keyCode==13) agregarHC();"></div>');
             } else {
                 $('#divDoc').hide();
@@ -205,8 +205,6 @@ function rellenarTablaHCB(valor) {
                     for (let j = his[his.length - 1].historia - 1; j > -1; j--) {
                         fechan = his[j].fechaAtencion;
                         $('#tablaHCF').append(`<tr id='k${j}'></tr>`);
-                        //$(`#k${j}`).append("<td>" + accesoDatos.ObtenerNombrePaciente(his[j].documento) + "</td>")
-                        //$(`#k${j}`).append("<td>" + fechan[2] + "/" + fechan[1] + "/" + fechan[0] + "</td>");
                         $(`#k${j}`).append("<td>" + fechan + "</td>");
                         $(`#k${j}`).append("<td>" + his[j].motivo + "</td>");
                         $(`#k${j}`).append("<td>" + his[j].diagnostico + "</td>");
@@ -219,7 +217,6 @@ function rellenarTablaHCB(valor) {
                     }
                     $('#btnNuevaActuacion').prop('disabled', false);
                 } else {
-                    //$("#tablaHCF").html("<thead><tr><th>No hay consultas</th></thead>")
                     $("#tablaHCF").html("<tr><td colspan='6'>No hay consultas</td>")
                 }
             } else {
@@ -286,7 +283,6 @@ function rellenarTablaHCBD() {
         let pacientes = accesoDatos.ObtenerPacientesTratados(accesoDatos.ObtenerUsuarioLogueado().numero);
         if (pacientes.length > 0) {
             let pacientesFiltrados = pacientes.filter((p) => p.fechaAtencion === fecha);
-            console.log(pacientesFiltrados);
 
             if (pacientesFiltrados.length > 0) {
                 for (let i = 0, lp = pacientesFiltrados.length; i < lp; i++) {
@@ -367,12 +363,6 @@ function vistaEscritorioSocio() {
     $("#btnCerrarSesionP").click(function () {
         utilidades.cerrarSesion($('#vistaEscritorioSocio'));
     });
-
-    /*$("#btnCerrarSesion").click(function () {
-        $('#vistaEscritorioSocio').hide();
-        $('#vistaLogin').show();
-        accesoDatos.EstablecerUsuarioLogueado(null);
-    });*/
 
     let st = [] //historias del usuario logueado
     for (let i = 0, l = accesoDatos.ObtenerHistoria(accesoDatos.ObtenerUsuarioLogueado().documento).length; i < l; i++) {
@@ -537,31 +527,34 @@ function cambiarMedico() {
 }
 
 function agregarHC() {
-    let val;
-    let ciValida = false;
-    let doc;
-    let motivo = $('#txtMotivo').val();;
+    var val = false;
+    var ciValida = true;
+    var doc;
+    var validation = false;
+    let motivo = $('#txtMotivo').val();
     let diagnostico = $('#txtDiagnostico').val();
     let prescripcion = $('#txtPrescripcion').val();
     let img = $('#fileImagen').val();
 
     if ($('#slcCampoFiltroHC').val() === 'nombre') {
-        if (validarCI($('#txtDoc').val()) && $('#txtDoc').val().length > 0) {
-            doc = Number($('#txtDoc').val());
-            if (accesoDatos.ObtenerNombrePaciente(doc) !== null) {
-                ciValida = true;
+        if (isNaN($('#txtDoc').val())) {
+            $('#divErrorAgregarHC').html("<span>La cédula no es válida</span>");
+            $('#divErrorAgregarHC').show();
+            ciValida = false;
+            doc = undefined;
+        } else {
+            if (validarCI($('#txtDoc').val()) && $('#txtDoc').val().length > 0) {
+                doc = Number($('#txtDoc').val());
+                if (accesoDatos.ObtenerNombrePaciente(doc) === null) {
+                    ciValida = false;
+                    doc = undefined;
+                }
             } else {
-                doc = undefined;
+                ciValida = false;
             }
         }
     } else {
         doc = Number($('#valorCampoFiltroHC').val());
-        if (accesoDatos.ObtenerNombrePaciente(doc) !== null) {
-            ciValida = true;
-        } else {
-            doc = undefined;
-        }
-        
     }
 
     if (motivo !== "" && diagnostico !== "" && prescripcion !== "" && doc !== undefined) {
@@ -574,18 +567,18 @@ function agregarHC() {
                 $('#divErrorAgregarHC').show();
             }
         }
-        var validation = accesoDatos.AgregarHistoria(doc, accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
+        validation = accesoDatos.AgregarHistoria(doc, accesoDatos.ObtenerUsuarioLogueado().numero, motivo, diagnostico, prescripcion, img);
         val = true;
-    } else {
-        val = false;
-        if (ciValida){
-            $('#divErrorAgregarHC').html("<span>Todos los campos son obligatorios</span>");
-            $('#divErrorAgregarHC').show();
-        } else {
-            $('#divErrorAgregarHC').html("<span>La cédula no es válida</span>");
-            $('#divErrorAgregarHC').show();
-        }
     }
+
+    if (ciValida) {
+        $('#divErrorAgregarHC').html("<span>Todos los campos son obligatorios</span>");
+        $('#divErrorAgregarHC').show();
+    } else {
+        $('#divErrorAgregarHC').html("<span>La cédula no es válida</span>");
+        $('#divErrorAgregarHC').show();
+    }
+
 
     if (validation && val) {
         $('#txtDoc').val("");
@@ -593,12 +586,13 @@ function agregarHC() {
         $('#txtDiagnostico').val("");
         $('#txtPrescripcion').val("");
         $('#fileImagen').val("");
-        $('#btnAgregarHC').attr('data-dismiss', "modal");
         $('#divErrorAgregarHC').hide();
         $('#modalSuccessTitulo').html('Consulta agregada correctamente');
         $('#modalSuccess').fadeTo(2000, 500).slideUp(500, function () {
             $('#modalSuccess').slideUp(500);
         });
         rellenarTablaHCB(doc);
+        $('#modalAgregarHC').modal('hide');
     }
+
 }
