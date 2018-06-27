@@ -124,7 +124,7 @@ var accesoDatos = (function () {
         }
     ];
 
-    var historias = [{
+    var historias = [/* {
             historia: 1,
             documento: 49274397,
             numero: 123456,
@@ -143,12 +143,12 @@ var accesoDatos = (function () {
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
             imagen: "../images/placa1.jpg"
-        },
+        }, */
         {
             historia: 1,
             documento: 51619074,
             numero: 123456,
-            fecha: new Date("2018/09/07"),
+            fecha: new Date("2018/01/07"),
             motivo: "Texto del motivo de la consulta…",
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
@@ -320,9 +320,14 @@ var accesoDatos = (function () {
     // Agrega una historia del paciente
     var agregarHistoria = function (_documento, _numero, _motivo, _diagnostico, _prescripcion, _imagen) {
         let _date = new Date();        
-        
+        let _historia;
         try {
-            let _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
+            if (accesoDatos.ObtenerHistoria(_documento).length === 0) {
+                _historia = 1;
+            } else {
+                _historia = accesoDatos.ObtenerHistoria(_documento)[accesoDatos.ObtenerHistoria(_documento).length - 1].historia + 1;
+            }
+
             historias.push({
                 'historia': _historia,
                 'documento': _documento,

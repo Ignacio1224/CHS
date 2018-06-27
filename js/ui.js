@@ -19,6 +19,8 @@ $('#valorCampoFiltroHC').keyup(function () {
         } else {
             $('#btnNuevaActuacion').attr('disabled', true);
         }
+    } else {
+        $('#btnNuevaActuacion').attr('disabled', false);
     }
 });
 
