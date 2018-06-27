@@ -124,7 +124,7 @@ var accesoDatos = (function () {
         }
     ];
 
-    var historias = [/* {
+    var historias = [{
             historia: 1,
             documento: 49274397,
             numero: 123456,
@@ -143,7 +143,7 @@ var accesoDatos = (function () {
             diagnostico: "Texto del diagnóstico del médico….",
             prescripcion: "Texto de la prescripción del médico...",
             imagen: "../images/placa1.jpg"
-        }, */
+        },
         {
             historia: 1,
             documento: 51619074,
